@@ -356,6 +356,34 @@
   .tag-test { background: rgba(255,255,255,.12); color: #fff; }
   .tag-dir  { background: rgba(0,0,0,.15); color: rgba(255,255,255,.7); }
 
+  /* ── CONSULTORES ─────────────────────────── */
+  .consultores {
+    margin-top: 8px;
+    padding-top: 7px;
+    border-top: 1px solid var(--border);
+  }
+  .cons-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .cons-item {
+    font-size: 11px;
+    color: #c0c4cc;
+    line-height: 1.7;
+    padding-left: 8px;
+    position: relative;
+  }
+  .cons-item::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
   .footnote {
     text-align: center;
     font-size: 12px;
@@ -417,10 +445,20 @@
           <div class="unit blue-bdr">
             <div class="unit-name">Unidade BH</div>
             <div class="unit-sup">Supervisor: <strong>Marco Túlio</strong></div>
+            <div class="consultores">
+              <div class="cons-label">Consultores</div>
+              <div class="cons-item">Leonardo Andreto</div>
+              <div class="cons-item">Ronaldo</div>
+            </div>
           </div>
           <div class="unit blue-bdr">
             <div class="unit-name">João Monlevade</div>
             <div class="unit-sup">Supervisora: <strong>Camila</strong></div>
+            <div class="consultores">
+              <div class="cons-label">Consultores</div>
+              <div class="cons-item">Fabrício</div>
+              <div class="cons-item">Daniel</div>
+            </div>
           </div>
           <div class="pap-section">
             <div class="pap-label">PAP</div>
@@ -442,11 +480,26 @@
         <div class="reg-body">
           <div class="unit teal-bdr">
             <div class="unit-name">Cor. Fabriciano</div>
-            <div class="unit-sup">Supervisor: <strong>Lee</strong></div>
+            <div class="unit-sup">Supervisor: <strong>Lee Van Cleef</strong></div>
+            <div class="consultores">
+              <div class="cons-label">Consultores</div>
+              <div class="cons-item">Marcelo</div>
+              <div class="cons-item">Thaís Pirâmides</div>
+              <div class="cons-item">Douglas</div>
+              <div class="cons-item">Lincoln</div>
+              <div class="cons-item">Williander</div>
+            </div>
           </div>
           <div class="unit teal-bdr">
             <div class="unit-name">Timóteo</div>
             <div class="unit-sup">Supervisor: <strong>Luciano</strong></div>
+            <div class="consultores">
+              <div class="cons-label">Consultores</div>
+              <div class="cons-item">Maria Luiza</div>
+              <div class="cons-item">Henrique</div>
+              <div class="cons-item">Yasmim Soares</div>
+              <div class="cons-item">Jhonatan</div>
+            </div>
           </div>
           <div class="pap-section">
             <div class="pap-label">PAP</div>
@@ -470,14 +523,36 @@
           <div class="unit purple-bdr">
             <div class="unit-name">Iguaçu</div>
             <div class="unit-sup">Supervisor: <strong>Daniel</strong></div>
+            <div class="consultores">
+              <div class="cons-label">Consultores</div>
+              <div class="cons-item">Axel</div>
+              <div class="cons-item">Isadora</div>
+              <div class="cons-item">Humberto</div>
+              <div class="cons-item">Lucas</div>
+              <div class="cons-item">Messias</div>
+              <div class="cons-item">João Mesquita</div>
+            </div>
           </div>
           <div class="unit purple-bdr">
             <div class="unit-name">Veneza</div>
             <div class="unit-sup">Supervisor: <strong>Wallysson</strong></div>
+            <div class="consultores">
+              <div class="cons-label">Consultores</div>
+              <div class="cons-item">Leo</div>
+              <div class="cons-item">Cícero</div>
+              <div class="cons-item">Arthur</div>
+              <div class="cons-item">Edmundo</div>
+            </div>
           </div>
           <div class="unit purple-bdr">
             <div class="unit-name">Horto</div>
             <div class="unit-sup">Supervisor: <strong>Rafael</strong></div>
+            <div class="consultores">
+              <div class="cons-label">Consultores</div>
+              <div class="cons-item">André</div>
+              <div class="cons-item">Mateus</div>
+              <div class="cons-item">Admilson</div>
+            </div>
           </div>
           <div class="pap-section">
             <div class="pap-label">PAP <span style="color:#aaa;font-size:10px;font-weight:400;">→ Diretoria</span></div>
