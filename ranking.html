@@ -3,595 +3,522 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🏆 Ranking de Vendedores - Multiluz Solar</title>
+<title>🏆 Ranking Comercial — Multiluz Solar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#D4A017;--gold2:#F0C040;--navy:#0B0F1E;--card:#141828;
+  --accent:#FF6B00;--muted:rgba(255,255,255,0.38);--border:rgba(255,255,255,0.08);
+}
+html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;}
 
-  body {
-    background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a1628 100%);
-    min-height: 100vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #fff;
-    overflow-x: hidden;
-  }
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#0B0F1E 60%,#1a1030);
+  border-bottom:1px solid var(--border);
+  padding:2rem 1.5rem 1.5rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:500px;height:260px;
+  background:radial-gradient(ellipse,rgba(212,160,23,0.16) 0%,transparent 70%);
+  pointer-events:none;
+}
+.sun-icon{font-size:28px;display:block;margin-bottom:.5rem;animation:float 4s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero-eyebrow{font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.4rem;}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,8vw,64px);
+  letter-spacing:.05em;line-height:1;
+  background:linear-gradient(135deg,#fff 30%,var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.2rem;
+}
+.hero-sub{font-size:13px;color:var(--muted);margin-bottom:1.25rem;}
 
-  .particles {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .particle {
-    position: absolute;
-    width: 3px; height: 3px;
-    background: rgba(255,200,0,0.4);
-    border-radius: 50%;
-    animation: float linear infinite;
-  }
-  @keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
-  }
+/* LIVE BADGE */
+.live-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(239,68,68,.1);border:0.5px solid rgba(239,68,68,.3);
+  border-radius:20px;padding:4px 12px;font-size:11px;color:#f87171;
+  margin-bottom:1.25rem;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#ef4444;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-  .container {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+/* STATS */
+.stat-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  max-width:480px;margin:0 auto;
+}
+.stat{background:rgba(255,255,255,.05);border:0.5px solid var(--border);border-radius:8px;padding:.65rem .5rem;text-align:center;}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em;}
+.stat-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px;}
 
-  header {
-    text-align: center;
-    padding: 40px 20px 20px;
-    animation: slideDown 0.8s ease;
-  }
+/* TABS */
+.day-tabs{
+  display:flex;overflow-x:auto;gap:8px;padding:1.25rem 1.25rem .5rem;
+  scrollbar-width:none;position:sticky;top:0;z-index:10;
+  background:var(--navy);border-bottom:0.5px solid var(--border);
+}
+.day-tabs::-webkit-scrollbar{display:none;}
+.tab{
+  flex-shrink:0;padding:8px 20px;border-radius:20px;
+  font-size:13px;font-weight:500;cursor:pointer;
+  border:0.5px solid var(--border);background:transparent;color:var(--muted);
+  transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.tab.active{background:var(--gold);color:#1a0a00;border-color:var(--gold);}
+.tab:hover:not(.active){border-color:rgba(212,160,23,.5);color:rgba(255,255,255,.8);}
 
-  @keyframes slideDown {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+/* PANEL */
+.panel{padding:1rem 1.25rem 3rem;max-width:680px;margin:0 auto;}
+.day-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.5rem 0 .75rem;border-bottom:0.5px solid var(--border);margin-bottom:.75rem;
+}
+.day-header-left{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+.day-header-right{font-size:11px;color:var(--gold);}
 
-  .logo-area { margin-bottom: 10px; }
-  .logo-area .sun { font-size: 3.5rem; animation: rotateSun 10s linear infinite; display: inline-block; }
-  @keyframes rotateSun { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+/* PODIUM */
+.podium-wrap{display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:.5rem 0 1.5rem;}
+.pod{flex:1;max-width:120px;text-align:center;}
+.pod-rank{font-size:13px;margin-bottom:4px;color:var(--muted);}
+.pod.p1 .pod-rank{color:var(--gold);font-weight:700;}
+.pod-avatar{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;
+  margin:0 auto 6px;border:2px solid;
+}
+.pod.p1 .pod-avatar{background:rgba(212,160,23,.18);border-color:var(--gold);color:var(--gold);}
+.pod.p2 .pod-avatar{background:rgba(180,180,180,.12);border-color:#aaa;color:#ccc;}
+.pod.p3 .pod-avatar{background:rgba(180,100,40,.12);border-color:#b46030;color:#c07040;}
+.pod-name{font-size:12px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px;margin:0 auto 3px;font-weight:500;}
+.pod-count{font-size:11px;color:var(--muted);margin-bottom:6px;}
+.pod-bar{border-radius:4px 4px 0 0;width:100%;}
+.pod.p1 .pod-bar{height:80px;background:rgba(212,160,23,.18);border-top:2px solid var(--gold);}
+.pod.p2 .pod-bar{height:58px;background:rgba(180,180,180,.1);border-top:2px solid #aaa;}
+.pod.p3 .pod-bar{height:40px;background:rgba(180,100,40,.1);border-top:2px solid #b46030;}
 
-  h1 {
-    font-size: 2.2rem;
-    font-weight: 900;
-    background: linear-gradient(90deg, #FFD700, #FF8C00, #FFD700);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 3s linear infinite;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-  @keyframes shimmer { to { background-position: 200% center; } }
+/* RANK LIST */
+.rank-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem;}
+.rank-item{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.04);border:0.5px solid var(--border);
+  border-radius:8px;padding:9px 12px;
+  transition:background .2s;
+}
+.rank-item:hover{background:rgba(255,255,255,.07);}
+.rank-item.top1{border-color:rgba(212,160,23,.35);background:rgba(212,160,23,.06);}
+.rank-pos{font-family:'Bebas Neue',sans-serif;font-size:17px;min-width:26px;text-align:center;color:var(--muted);}
+.rank-pos.top3{color:var(--gold);}
+.rank-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(212,160,23,.14);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;
+}
+.rank-info{flex:1;min-width:0;}
+.rank-name{font-size:13px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rank-sub{font-size:11px;color:var(--muted);}
+.rank-bar-wrap{width:72px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.rank-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--accent));}
+.rank-count{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);min-width:32px;text-align:right;}
 
-  .subtitle {
-    color: rgba(255,255,255,0.6);
-    font-size: 0.95rem;
-    margin-top: 5px;
-    letter-spacing: 1px;
-  }
+/* CHART */
+.chart-section{margin-top:1rem;}
+.chart-title{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem;}
+.chart-wrap{position:relative;width:100%;}
 
-  .stats-bar {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 20px 0;
-    padding: 15px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    border: 1px solid rgba(255,215,0,0.2);
-    animation: fadeIn 1s ease 0.3s both;
-  }
+/* EMPTY */
+.empty-day{text-align:center;padding:3rem 1rem;}
+.empty-icon{font-size:48px;margin-bottom:.75rem;display:block;opacity:.35;}
+.empty-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.04em;color:var(--gold2);margin-bottom:.6rem;}
+.empty-msg{font-size:14px;color:var(--muted);max-width:280px;margin:0 auto 1.5rem;line-height:1.6;}
+.empty-fire{font-size:22px;letter-spacing:8px;opacity:.6;}
 
-  .stat { text-align: center; }
-  .stat-value { font-size: 1.8rem; font-weight: 900; color: #FFD700; }
-  .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+/* LOADING */
+.loading{text-align:center;padding:3rem;color:var(--muted);font-size:13px;}
+.loading-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin:0 3px;animation:bounce .9s ease-in-out infinite;}
+.loading-dot:nth-child(2){animation-delay:.15s;}
+.loading-dot:nth-child(3){animation-delay:.3s;}
+@keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:.4}40%{transform:scale(1);opacity:1}}
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* UPDATE INFO */
+.update-info{text-align:center;font-size:11px;color:var(--muted);padding:.75rem;border-top:0.5px solid var(--border);margin-top:1rem;}
 
-  .last-update {
-    text-align: center;
-    color: rgba(255,255,255,0.4);
-    font-size: 0.8rem;
-    margin-bottom: 15px;
-  }
-  .update-dot {
-    display: inline-block;
-    width: 8px; height: 8px;
-    background: #00ff88;
-    border-radius: 50%;
-    margin-right: 5px;
-    animation: pulse 2s ease-in-out infinite;
-    vertical-align: middle;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.7); }
-  }
+/* SHIMMER SKELETON */
+.skeleton{
+  background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.05) 75%);
+  background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-  .ranking-list { display: flex; flex-direction: column; gap: 12px; }
-
-  .rank-item {
-    display: flex;
-    align-items: center;
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    padding: 15px 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: all 0.3s ease;
-    animation: slideIn 0.5s ease both;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .rank-item::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-    transition: left 0.5s;
-  }
-  .rank-item:hover::before { left: 100%; }
-  .rank-item:hover {
-    transform: translateX(5px) scale(1.01);
-    border-color: rgba(255,215,0,0.3);
-    background: rgba(255,255,255,0.08);
-    box-shadow: 0 5px 20px rgba(255,215,0,0.15);
-  }
-
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(-30px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .rank-item.pos-1 {
-    background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,0,0.08));
-    border-color: rgba(255,215,0,0.5);
-    box-shadow: 0 0 20px rgba(255,215,0,0.2);
-  }
-  .rank-item.pos-2 {
-    background: linear-gradient(135deg, rgba(192,192,192,0.12), rgba(192,192,192,0.05));
-    border-color: rgba(192,192,192,0.4);
-  }
-  .rank-item.pos-3 {
-    background: linear-gradient(135deg, rgba(205,127,50,0.12), rgba(205,127,50,0.05));
-    border-color: rgba(205,127,50,0.4);
-  }
-
-  .rank-position { font-size: 1.5rem; font-weight: 900; min-width: 55px; text-align: center; }
-  .pos-1 .rank-position { color: #FFD700; text-shadow: 0 0 15px rgba(255,215,0,0.7); }
-  .pos-2 .rank-position { color: #C0C0C0; text-shadow: 0 0 15px rgba(192,192,192,0.5); }
-  .pos-3 .rank-position { color: #CD7F32; text-shadow: 0 0 15px rgba(205,127,50,0.5); }
-
-  .medal { font-size: 1.8rem; min-width: 45px; text-align: center; }
-
-  .seller-info { flex: 1; padding: 0 15px; }
-  .seller-name {
-    font-size: 1.1rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px;
-    color: #fff; margin-bottom: 5px;
-  }
-  .pos-1 .seller-name { color: #FFD700; }
-  .pos-2 .seller-name { color: #E0E0E0; }
-  .pos-3 .seller-name { color: #CD7F32; }
-
-  .progress-container {
-    height: 8px; background: rgba(255,255,255,0.1);
-    border-radius: 10px; overflow: hidden; margin-top: 5px;
-  }
-  .progress-bar {
-    height: 100%; border-radius: 10px;
-    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 0%;
-  }
-  .pos-1 .progress-bar { background: linear-gradient(90deg, #FFD700, #FF8C00); }
-  .pos-2 .progress-bar { background: linear-gradient(90deg, #A0A0A0, #C0C0C0); }
-  .pos-3 .progress-bar { background: linear-gradient(90deg, #A0522D, #CD7F32); }
-  .rank-item:not(.pos-1):not(.pos-2):not(.pos-3) .progress-bar {
-    background: linear-gradient(90deg, #4a90e2, #7b68ee);
-  }
-
-  .seller-count { text-align: right; min-width: 80px; }
-  .count-number { font-size: 2rem; font-weight: 900; color: #FFD700; line-height: 1; }
-  .count-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
-
-  .podium-crown {
-    position: absolute; top: -5px; right: 10px;
-    font-size: 1.2rem;
-    animation: bounceCrown 2s ease-in-out infinite;
-  }
-  @keyframes bounceCrown {
-    0%, 100% { transform: translateY(0) rotate(-5deg); }
-    50% { transform: translateY(-5px) rotate(5deg); }
-  }
-
-  .loading { text-align: center; padding: 60px 20px; color: rgba(255,255,255,0.6); }
-  .spinner {
-    width: 50px; height: 50px;
-    border: 3px solid rgba(255,215,0,0.2);
-    border-top-color: #FFD700;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 20px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .error-msg {
-    background: rgba(255,50,50,0.1);
-    border: 1px solid rgba(255,50,50,0.3);
-    border-radius: 10px; padding: 20px;
-    text-align: center; color: #ff8080; margin: 20px 0;
-  }
-  .error-msg a { color: #4da6ff; }
-
-  .confetti-container {
-    position: fixed; top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none; z-index: 999;
-  }
-  .confetti-piece {
-    position: absolute; width: 10px; height: 10px;
-    animation: confettiFall 4s ease-in forwards;
-  }
-  @keyframes confettiFall {
-    0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-  }
-
-  footer {
-    text-align: center; margin-top: 30px;
-    padding: 20px; color: rgba(255,255,255,0.3); font-size: 0.8rem;
-  }
-
-  .rank-item:nth-child(1) { animation-delay: 0.05s; }
-  .rank-item:nth-child(2) { animation-delay: 0.10s; }
-  .rank-item:nth-child(3) { animation-delay: 0.15s; }
-  .rank-item:nth-child(4) { animation-delay: 0.20s; }
-  .rank-item:nth-child(5) { animation-delay: 0.25s; }
-  .rank-item:nth-child(6) { animation-delay: 0.30s; }
-  .rank-item:nth-child(7) { animation-delay: 0.35s; }
-  .rank-item:nth-child(8) { animation-delay: 0.40s; }
-  .rank-item:nth-child(9) { animation-delay: 0.45s; }
-  .rank-item:nth-child(10) { animation-delay: 0.50s; }
-
-  @media (max-width: 600px) {
-    h1 { font-size: 1.5rem; }
-    .rank-item { padding: 12px 15px; }
-    .seller-name { font-size: 0.95rem; }
-    .count-number { font-size: 1.5rem; }
-    .stats-bar { gap: 15px; }
-  }
+@media(max-width:480px){
+  .stat-val{font-size:18px;}
+  .hero-title{font-size:42px;}
+  .pod-bar.p1{height:60px;}
+  .pod-bar.p2{height:44px;}
+  .pod-bar.p3{height:30px;}
+}
 </style>
 </head>
 <body>
 
-<div class="particles" id="particles"></div>
-<div class="confetti-container" id="confetti"></div>
-
-<div class="container">
-  <header>
-    <div class="logo-area">
-      <span class="sun">&#9728;&#65039;</span>
-    </div>
-    <h1>&#127942; Ranking de Vendedores</h1>
-    <p class="subtitle">Multiluz Solar &middot; Feira Multissetorial 2026</p>
-  </header>
-
-  <div class="stats-bar" id="statsBar" style="display:none;">
-    <div class="stat">
-      <div class="stat-value" id="totalLeads">-</div>
-      <div class="stat-label">Total Leads</div>
-    </div>
-    <div class="stat">
-      <div class="stat-value" id="totalVendedores">-</div>
-      <div class="stat-label">Vendedores</div>
-    </div>
-    <div class="stat">
-      <div class="stat-value" id="topVendedor">-</div>
-      <div class="stat-label">L&iacute;der</div>
-    </div>
+<!-- HERO -->
+<div class="hero">
+  <span class="sun-icon">☀️</span>
+  <div class="hero-eyebrow">Multiluz Solar · Feiraço 2026</div>
+  <div class="hero-title">Ranking Comercial</div>
+  <div class="hero-sub">27 a 30 de maio · 4 dias de batalha</div>
+  <div class="live-badge"><span class="live-dot"></span> Atualiza a cada 30s</div>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-val" id="s-leads">—</div><div class="stat-lbl">Total Leads</div></div>
+    <div class="stat"><div class="stat-val" id="s-vend">—</div><div class="stat-lbl">Vendedores</div></div>
+    <div class="stat"><div class="stat-val" id="s-lider">—</div><div class="stat-lbl">Líder Geral</div></div>
   </div>
-
-  <div class="last-update" id="lastUpdate" style="display:none;">
-    <span class="update-dot"></span>
-    Atualizado em: <span id="updateTime">-</span>
-    &nbsp;&middot;&nbsp; pr&oacute;xima em <span id="refreshSec">30</span>s
-  </div>
-
-  <div id="rankingContainer">
-    <div class="loading">
-      <div class="spinner"></div>
-      <p>Carregando ranking...</p>
-    </div>
-  </div>
-
-  <footer>
-    <p>&#9728;&#65039; Multiluz Solar &middot; Dados em tempo real &middot; Google Sheets</p>
-  </footer>
 </div>
 
+<!-- TABS -->
+<div class="day-tabs" id="tabs"></div>
+
+<!-- PANEL -->
+<div class="panel" id="panel-content">
+  <div class="loading">
+    <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
+    <p style="margin-top:.75rem;">Carregando dados...</p>
+  </div>
+</div>
+<div class="update-info" id="update-info">Aguardando dados...</div>
+
 <script>
-// ================================================
-//  CONFIGURACAO - edite apenas esta secao
-// ================================================
-var SHEET_ID        = '16Of-faCfyl36fMBZUClwT7t4lG5XpMDW58asRYozp9E';
-var SHEET_NAME      = 'Respostas ao formul\u00e1rio 1';
-var COLUMN_VENDEDOR = 'F';
-var REFRESH_INTERVAL = 30; // segundos
-// ================================================
+// ─── CONFIG ────────────────────────────────────────────────────────────────
+const SHEET_ID = '13PL1beQX2VrUfXdm5rLNh3itn6VJKQfCSwr3jv3Qk-A';
+const SHEET_NAME = 'Respostas ao formulário 1';
+const REFRESH_MS = 30000; // 30 segundos
 
-var previousRanking = [];
-var refreshTimer    = null;
-var countdown       = REFRESH_INTERVAL;
+// URL pública do Google Sheets (precisa estar publicada: Arquivo > Publicar na web)
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-/* ---- particulas de fundo ---- */
-function createParticles() {
-  var container = document.getElementById('particles');
-  for (var i = 0; i < 30; i++) {
-    var p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left              = (Math.random() * 100) + '%';
-    p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-    p.style.animationDelay    = (Math.random() * 15)      + 's';
-    var sz = (Math.random() * 4 + 1) + 'px';
-    p.style.width = p.style.height = sz;
-    p.style.background =
-      'rgba(255,' + Math.floor(Math.random() * 100 + 150) + ',0,' +
-      (Math.random() * 0.5 + 0.2).toFixed(2) + ')';
-    container.appendChild(p);
+// ─── CONSTANTES ─────────────────────────────────────────────────────────────
+const DAYS = ['27/05','28/05','29/05','30/05'];
+const DAY_LABELS = ['Quarta-feira 27/05','Quinta-feira 28/05','Sexta-feira 29/05','Sábado 30/05'];
+const TAB_LABELS = ['Qua 27','Qui 28','Sex 29','Sáb 30'];
+
+const MOTIVATIONS = [
+  { title:'O palco está vazio',  msg:'Nenhum lead ainda — a arena aguarda os guerreiros. Que comece o jogo! 🔥' },
+  { title:'A batalha ainda não chegou', msg:'Silêncio antes da tempestade. Quando abrir, que cada segundo seja uma oportunidade.' },
+  { title:'Aguardando abertura', msg:'Esse dia ainda tá no horizonte. Descanse, afie a faca — porque quando chegar a hora, sem desculpas!' },
+  { title:'Dia final chegando', msg:'O último round está chegando. Quem vai deixar tudo na quadra hoje? Sangue nos olhos! 🏆' },
+];
+
+// ─── NORMALIZAÇÃO DE NOMES ───────────────────────────────────────────────────
+const NORM_MAP = {
+  'yasmim soares':'Yasmin Soares','yasmin soares':'Yasmin Soares','yasmin':'Yasmin Soares',
+  'kevson souza':'Kevson Souza','kevson de jesus':'Kevson Souza','kevison':'Kevson Souza',
+  'kevison souza':'Kevson Souza','keverson souza':'Kevson Souza','kevson':'Kevson Souza',
+  'raul gandini':'Raul Gandini','raul':'Raul Gandini','rau':'Raul Gandini','raúl gandini':'Raul Gandini','raúl':'Raul Gandini',
+  'daniel roque':'Daniel Roque','daniel rock':'Daniel Roque','daniel oliveira':'Daniel Roque',
+  'marcelo henrique':'Marcelo Henrique','marcelo':'Marcelo',
+  'andré luiz':'André Luiz','andre luiz':'André Luiz','andré luís':'André Luiz','andre luis':'André Luiz',
+  'lincoln':'Lincoln','lincon':'Lincoln','linconl':'Lincoln','lincoln ulhoa':'Lincoln','lincon ulhoa':'Lincoln',
+  'williander':'Williander','wiliander':'Williander','williander aparecido':'Williander',
+  'joão vitor':'João Vitor','joao vitor':'João Vitor','joão victor':'João Vitor','joao victor':'João Vitor',
+  'joão victor':'João Vitor','joão vitor ':'João Vitor',
+  'lucas eduardo':'Lucas Eduardo',
+  'humberto':'Humberto','humberto filipe':'Humberto','hunberyo':'Humberto','hunberto':'Humberto',
+  'cícero':'Cícero','cicero':'Cícero','cícero manoel':'Cícero','cicero manoel':'Cícero','cicera':'Cícero',
+  'rafael dutra':'Rafael Dutra',
+  'messias':'Messias','mesias':'Messias','mecias':'Messias',
+  'ian almeida':'Ian Almeida',
+  'josé miguel':'José Miguel','jose miguel':'José Miguel',
+  'camila':'Camila','camila emanueli':'Camila','kamila':'Camila',
+  'rodrigo':'Rodrigo','rodrigo ribas':'Rodrigo',
+  'wagner':'Wagner','wagner rodrigues':'Wagner',
+  'maria luiza':'Maria Luiza','maria luiza silva':'Maria Luiza','luiza':'Maria Luiza',
+  'henrique':'Henrique','henrique angelo':'Henrique','vendedor henrique':'Henrique',
+  'charles':'Charles','jarles':'Charles',
+  'edmundo':'Edmundo','edmundo de araújo':'Edmundo','edmundo de araujo':'Edmundo',
+  'aline':'Aline','aline fácil':'Aline','aline facil':'Aline',
+  'douglas':'Douglas','douglas rodrigues':'Douglas',
+  'jhonatan':'Jhonatan','jonatan':'Jhonatan','jonathan':'Jhonatan','jhonatan andrade':'Jhonatan',
+  'lucas':'Lucas','lucas souza':'Lucas','lucas basso':'Lucas',
+  'césar':'César','cesar':'César','cesar augusto':'César','césar mf':'César',
+  'césar solar':'César','cesar mf':'César','césar cliente quer visita':'César',
+  'césar ligar daqui a 14 dias':'César','césar aumento usina':'César',
+  'bruno':'Bruno',
+  'renato':'Renato','david':'David','lee':'Lee','lee van cleff':'Lee',
+  'marcos':'Marcos','bruno':'Bruno',
+  'rafael':'Rafael Dutra',
+  'cícero manoel':'Cícero',
+};
+
+function normalizeName(raw) {
+  if (!raw || !raw.trim()) return null;
+  const clean = raw.trim().toLowerCase().replace(/\s+/g,' ');
+  // ignora entradas claramente inválidas
+  if (clean.length < 2) return null;
+  if (clean.includes('@')) return null; // email no campo
+  if (/^\d+$/.test(clean)) return null; // só número
+  if (['nao sei','não sei','teste','eu'].includes(clean)) return null;
+  if (clean.startsWith('não teve')) return null;
+  return NORM_MAP[clean] || raw.trim().split(' ').slice(0,2).map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' ');
+}
+
+function getDay(ts) {
+  // ts format: "27/05/2026 18:55:31" or "2026-05-27T18:55:31"
+  if (!ts) return null;
+  const s = String(ts);
+  // tenta dd/mm/aaaa
+  const m1 = s.match(/^(\d{2})\/(\d{2})/);
+  if (m1) return m1[1]+'/'+m1[2];
+  // tenta aaaa-mm-dd
+  const m2 = s.match(/(\d{4})-(\d{2})-(\d{2})/);
+  if (m2) return m2[3]+'/'+m2[2];
+  return null;
+}
+
+function initials(name) {
+  return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+}
+
+// ─── ESTADO GLOBAL ──────────────────────────────────────────────────────────
+let activeDay = 0;
+let rankings = {};
+let allData = [];
+let chartInst = null;
+
+// ─── FETCH PLANILHA ─────────────────────────────────────────────────────────
+async function fetchSheet() {
+  try {
+    const res = await fetch(SHEET_URL + '&rand=' + Date.now());
+    const text = await res.text();
+    // Google retorna: google.visualization.Query.setResponse({...});
+    const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?\s*$/, ''));
+    return parseGVizResponse(json);
+  } catch(e) {
+    console.error('Erro ao buscar planilha:', e);
+    return null;
   }
 }
 
-/* ---- confetti ---- */
-function launchConfetti() {
-  var container = document.getElementById('confetti');
-  container.innerHTML = '';
-  var colors = ['#FFD700','#FF6B6B','#4ECDC4','#45B7D1','#96CEB4','#FFEAA7'];
-  for (var i = 0; i < 50; i++) {
-    var c = document.createElement('div');
-    c.className = 'confetti-piece';
-    c.style.left             = (Math.random() * 100) + '%';
-    c.style.top              = '-10px';
-    c.style.background       = colors[Math.floor(Math.random() * colors.length)];
-    c.style.transform        = 'rotate(' + (Math.random() * 360) + 'deg)';
-    c.style.animationDelay    = (Math.random() * 2)       + 's';
-    c.style.animationDuration = (Math.random() * 2 + 3)   + 's';
-    c.style.borderRadius     = Math.random() > 0.5 ? '50%' : '0';
-    container.appendChild(c);
+function parseGVizResponse(json) {
+  const rows = json.table?.rows || [];
+  const data = [];
+  rows.forEach(row => {
+    const cells = row.c || [];
+    // col 0 = timestamp, col 6 = vendedor (índice 6)
+    const tsCell = cells[0];
+    const vendCell = cells[6];
+    if (!tsCell) return;
+    const ts = tsCell.f || tsCell.v || '';
+    const vend = vendCell ? (vendCell.v || '') : '';
+    data.push([String(ts), String(vend)]);
+  });
+  return data;
+}
+
+function buildRankings(data) {
+  const byDay = {};
+  DAYS.forEach(d => { byDay[d] = {}; });
+  data.forEach(([ts, rawVend]) => {
+    const day = getDay(ts);
+    if (!day || !byDay[day]) return;
+    const name = normalizeName(rawVend);
+    if (!name) return;
+    byDay[day][name] = (byDay[day][name] || 0) + 1;
+  });
+  return byDay;
+}
+
+function sortRank(obj) {
+  return Object.entries(obj).sort((a, b) => b[1] - a[1]);
+}
+
+// ─── STATS GLOBAIS ──────────────────────────────────────────────────────────
+function updateStats(data, rankings) {
+  const total = data.filter(([,raw]) => normalizeName(raw)).length;
+  const vSet = new Set();
+  DAYS.forEach(d => Object.keys(rankings[d]).forEach(n => vSet.add(n)));
+
+  const all = {};
+  DAYS.forEach(d => {
+    Object.entries(rankings[d]).forEach(([n,c]) => { all[n] = (all[n]||0)+c; });
+  });
+  const top = Object.entries(all).sort((a,b)=>b[1]-a[1]);
+  const lider = top.length ? top[0][0].split(' ')[0] : '—';
+
+  document.getElementById('s-leads').textContent = total;
+  document.getElementById('s-vend').textContent = vSet.size;
+  document.getElementById('s-lider').textContent = lider;
+}
+
+// ─── RENDER TABS ────────────────────────────────────────────────────────────
+function renderTabs() {
+  const wrap = document.getElementById('tabs');
+  wrap.innerHTML = '';
+  DAYS.forEach((d, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (i === activeDay ? ' active' : '');
+    const count = Object.values(rankings[d] || {}).reduce((a,b)=>a+b,0);
+    btn.innerHTML = TAB_LABELS[i] + (count > 0 ? ` <span style="font-size:10px;opacity:.6">(${count})</span>` : '');
+    btn.onclick = () => { activeDay = i; renderTabs(); renderPanel(); };
+    wrap.appendChild(btn);
+  });
+}
+
+// ─── RENDER PANEL ───────────────────────────────────────────────────────────
+function renderPanel() {
+  if (chartInst) { chartInst.destroy(); chartInst = null; }
+  const panel = document.getElementById('panel-content');
+  panel.innerHTML = '';
+
+  const day = DAYS[activeDay];
+  const rank = sortRank(rankings[day] || {});
+  const hasData = rank.length > 0;
+  const totalDay = rank.reduce((a, b) => a + b[1], 0);
+
+  // Header
+  const hdr = document.createElement('div');
+  hdr.className = 'day-header';
+  hdr.innerHTML = `<span class="day-header-left">${DAY_LABELS[activeDay]}</span>
+    <span class="day-header-right">${hasData ? rank.length+' vendedores · '+totalDay+' leads' : 'Aguardando...'}</span>`;
+  panel.appendChild(hdr);
+
+  if (!hasData) {
+    const mi = MOTIVATIONS[activeDay] || MOTIVATIONS[0];
+    const empty = document.createElement('div');
+    empty.className = 'empty-day';
+    empty.innerHTML = `
+      <span class="empty-icon">⚡</span>
+      <div class="empty-title">${mi.title}</div>
+      <p class="empty-msg">${mi.msg}</p>
+      <div class="empty-fire">🔥 🔥 🔥</div>`;
+    panel.appendChild(empty);
+    return;
   }
-  setTimeout(function(){ container.innerHTML = ''; }, 5000);
-}
 
-/* ---- normalizar nomes (agrupa variantes) ---- */
-function normalizeName(name) {
-  var n = name.trim().toUpperCase().replace(/\s+/g, ' ');
-  var map = {
-    'BARBARA':'B\u00c1RBARA','B\u00c1RBARA':'B\u00c1RBARA','BARBAR\u00c1':'B\u00c1RBARA',
-    'MICHEL':'MIGUEL',
-    'GABRIEL BH':'GABRIEL BH','GABRIEL PH':'GABRIEL BH','GABRIEL bh':'GABRIEL BH',
-    'IAN':'IAN','Ian':'IAN',
-    'WILLANDER':'WILLIANDER',
-    'CICERO':'C\u00cdCERO','C\u00cdCERO':'C\u00cdCERO','Cicero':'C\u00cdCERO',
-    'WELSON':'WELSON','Welson':'WELSON',
-    'EDMUNDO':'EDMUNDO','Edmundo':'EDMUNDO',
-    'LINCOLN':'LINCOLN','Lincoln':'LINCOLN',
-    'HUMBERTO':'HUMBERTO',
-    'MESSIAS':'MESSIAS',
-    'RODRIGO':'RODRIGO',
-    'MARIA LUIZA':'MARIA LUIZA',
-    'FABRICIO':'FABR\u00cdCIO','FABR\u00cdCIO':'FABR\u00cdCIO',
-    'CAMILA':'CAMILA',
-    'DANIEL':'DANIEL','Daniel':'DANIEL',
-    'IAGO':'IAGO','Iago':'IAGO',
-    'ANDRE':'ANDR\u00c9','ANDR\u00c9':'ANDR\u00c9','Andr\u00e9':'ANDR\u00c9'
-  };
-  return map[n] || n;
-}
+  const maxC = rank[0][1];
 
-/* ---- buscar dados da planilha via gviz ---- */
-function fetchSheetData() {
-  return new Promise(function(resolve, reject) {
-    var callbackName = '_gvizCb_' + Date.now();
-    var query = 'select ' + COLUMN_VENDEDOR +
-                ' where ' + COLUMN_VENDEDOR + " <> '' " +
-                ' label ' + COLUMN_VENDEDOR + " ''";
-    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
-              '/gviz/tq?tqx=out:json&tq=' + encodeURIComponent(query) +
-              '&sheet=' + encodeURIComponent(SHEET_NAME) +
-              '&headers=1';
+  // PÓDIO (top 3)
+  if (rank.length >= 2) {
+    const pw = document.createElement('div');
+    pw.className = 'podium-wrap';
+    const order = rank.length >= 3
+      ? [[rank[1], 2, 'p2'], [rank[0], 1, 'p1'], [rank[2], 3, 'p3']]
+      : [[null, 2, 'p2'], [rank[0], 1, 'p1'], [null, 3, 'p3']];
+    order.forEach(([entry, pos, cls]) => {
+      const pod = document.createElement('div');
+      pod.className = `pod ${cls}`;
+      if (!entry) { pod.innerHTML = '<div class="pod-bar"></div>'; pw.appendChild(pod); return; }
+      const [name, count] = entry;
+      const medals = ['', '👑 1°', '2°', '3°'];
+      pod.innerHTML = `
+        <div class="pod-rank">${medals[pos]}</div>
+        <div class="pod-avatar">${initials(name)}</div>
+        <div class="pod-name">${name.split(' ')[0]}</div>
+        <div class="pod-count">${count} leads</div>
+        <div class="pod-bar"></div>`;
+      pw.appendChild(pod);
+    });
+    panel.appendChild(pw);
+  }
 
-    var script = document.createElement('script');
-    var done   = false;
+  // LISTA
+  const list = document.createElement('div');
+  list.className = 'rank-list';
+  rank.forEach(([name, count], i) => {
+    const item = document.createElement('div');
+    item.className = 'rank-item' + (i === 0 ? ' top1' : '');
+    const pct = Math.round((count / maxC) * 100);
+    item.innerHTML = `
+      <span class="rank-pos ${i < 3 ? 'top3' : ''}">${i + 1}</span>
+      <div class="rank-avatar">${initials(name)}</div>
+      <div class="rank-info">
+        <div class="rank-name">${name}</div>
+        <div class="rank-sub">${count} lead${count > 1 ? 's' : ''} capturado${count > 1 ? 's' : ''}</div>
+      </div>
+      <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:${pct}%"></div></div>
+      <span class="rank-count">${count}</span>`;
+    list.appendChild(item);
+  });
+  panel.appendChild(list);
 
-    window[callbackName] = function(data) {
-      done = true;
-      delete window[callbackName];
-      document.head.removeChild(script);
-      try {
-        if (data.status === 'error') {
-          reject(new Error(data.errors && data.errors[0] ? data.errors[0].message : 'Erro na planilha'));
-          return;
-        }
-        var rows   = (data.table && data.table.rows) ? data.table.rows : [];
-        var counts = {};
-        rows.forEach(function(row) {
-          var val = row.c && row.c[0] && row.c[0].v;
-          if (val && typeof val === 'string' && val.trim()) {
-            var norm = normalizeName(val.trim());
-            if (norm && norm !== 'N\u00c3O SEI' && norm !== 'NAO SEI' && norm.length > 1) {
-              counts[norm] = (counts[norm] || 0) + 1;
-            }
+  // GRÁFICO
+  if (rank.length > 0) {
+    const top = rank.slice(0, 15);
+    const sec = document.createElement('div');
+    sec.className = 'chart-section';
+    sec.innerHTML = `<div class="chart-title">Visão geral do dia</div>`;
+    const cw = document.createElement('div');
+    cw.className = 'chart-wrap';
+    cw.style.height = (Math.min(top.length, 15) * 40 + 60) + 'px';
+    cw.innerHTML = `<canvas id="dayChart" role="img" aria-label="Gráfico de leads por vendedor no dia ${day}"></canvas>`;
+    sec.appendChild(cw);
+    panel.appendChild(sec);
+
+    setTimeout(() => {
+      const ctx = document.getElementById('dayChart');
+      if (!ctx) return;
+      chartInst = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: top.map(([n]) => n.split(' ')[0]),
+          datasets: [{
+            label: 'Leads',
+            data: top.map(([, c]) => c),
+            backgroundColor: top.map((_, i) => i === 0 ? 'rgba(212,160,23,0.85)' : i < 3 ? 'rgba(212,160,23,0.5)' : 'rgba(255,107,0,0.35)'),
+            borderColor: top.map((_, i) => i === 0 ? '#D4A017' : i < 3 ? 'rgba(212,160,23,0.7)' : 'rgba(255,107,0,0.6)'),
+            borderWidth: 1, borderRadius: 4,
+          }]
+        },
+        options: {
+          indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 } } },
+            y: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.75)', font: { size: 12 } } }
           }
-        });
-        var result = Object.keys(counts)
-          .map(function(k){ return { name: k, total: counts[k] }; })
-          .sort(function(a, b){ return b.total - a.total; });
-        resolve(result);
-      } catch(e) { reject(e); }
-    };
-
-    // usa tqx=out:json com callback inline
-    var fetchUrl = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
-      '/gviz/tq?tqx=out:json;responseHandler:' + callbackName +
-      '&tq=' + encodeURIComponent(query) +
-      '&sheet=' + encodeURIComponent(SHEET_NAME);
-
-    script.src = fetchUrl;
-    script.onerror = function(){
-      if (!done) {
-        done = true;
-        delete window[callbackName];
-        try { document.head.removeChild(script); } catch(e){}
-        reject(new Error('Falha ao carregar dados. Verifique se a planilha est\u00e1 p\u00fablica.'));
-      }
-    };
-    document.head.appendChild(script);
-  });
-}
-
-/* ---- medalha por posicao ---- */
-function getMedal(pos) {
-  if (pos === 1) return '&#129351;';
-  if (pos === 2) return '&#129352;';
-  if (pos === 3) return '&#129353;';
-  if (pos <= 5)  return '&#11088;';
-  return '&#128312;';
-}
-
-/* ---- detectar mudanca ---- */
-function hasRankingChanged(newRanking) {
-  if (newRanking.length !== previousRanking.length) return true;
-  for (var i = 0; i < newRanking.length; i++) {
-    if (newRanking[i].name  !== previousRanking[i].name ||
-        newRanking[i].total !== previousRanking[i].total) return true;
+        }
+      });
+    }, 80);
   }
-  return false;
 }
 
-/* ---- renderizar ---- */
-function renderRanking(ranking) {
-  var container = document.getElementById('rankingContainer');
-  var maxCount  = ranking[0] ? ranking[0].total : 1;
-  var totalLeads = ranking.reduce(function(s, r){ return s + r.total; }, 0);
-
-  document.getElementById('totalLeads').textContent     = totalLeads;
-  document.getElementById('totalVendedores').textContent = ranking.length;
-  document.getElementById('topVendedor').textContent    =
-    ranking[0] ? ranking[0].name.split(' ')[0] : '-';
-  document.getElementById('statsBar').style.display = 'flex';
-
-  var now = new Date();
-  document.getElementById('updateTime').textContent = now.toLocaleTimeString('pt-BR');
-  document.getElementById('refreshSec').textContent = REFRESH_INTERVAL;
-  document.getElementById('lastUpdate').style.display = 'block';
-
-  var html = '<div class="ranking-list">';
-  ranking.forEach(function(seller, idx) {
-    var pos      = idx + 1;
-    var posClass = pos <= 3 ? 'pos-' + pos : '';
-    var pct      = Math.round((seller.total / maxCount) * 100);
-    html += '<div class="rank-item ' + posClass + '" style="animation-delay:' + (idx * 0.07) + 's">';
-    if (pos === 1) html += '<span class="podium-crown">&#128081;</span>';
-    html += '<div class="rank-position">#' + pos + '</div>';
-    html += '<div class="medal">' + getMedal(pos) + '</div>';
-    html += '<div class="seller-info">';
-    html +=   '<div class="seller-name">' + seller.name + '</div>';
-    html +=   '<div class="progress-container">';
-    html +=     '<div class="progress-bar" data-pct="' + pct + '" style="width:0%"></div>';
-    html +=   '</div>';
-    html += '</div>';
-    html += '<div class="seller-count">';
-    html +=   '<div class="count-number">' + seller.total + '</div>';
-    html +=   '<div class="count-label">leads</div>';
-    html += '</div>';
-    html += '</div>';
-  });
-  html += '</div>';
-  container.innerHTML = html;
-
-  setTimeout(function() {
-    var bars = document.querySelectorAll('.progress-bar');
-    for (var i = 0; i < bars.length; i++) {
-      bars[i].style.width = bars[i].getAttribute('data-pct') + '%';
-    }
-  }, 100);
-
-  if (previousRanking.length === 0 ||
-      (previousRanking[0] && previousRanking[0].name !== ranking[0].name)) {
-    setTimeout(launchConfetti, 500);
+// ─── CICLO PRINCIPAL ─────────────────────────────────────────────────────────
+async function refresh() {
+  const data = await fetchSheet();
+  if (data && data.length > 0) {
+    allData = data;
+    rankings = buildRankings(data);
+    updateStats(data, rankings);
+    renderTabs();
+    renderPanel();
+    const now = new Date();
+    document.getElementById('update-info').textContent =
+      `Atualizado às ${now.toLocaleTimeString('pt-BR')} · próxima atualização em 30s`;
+  } else {
+    document.getElementById('update-info').textContent =
+      '⚠ Não foi possível carregar os dados. Verifique se a planilha está publicada.';
   }
-  previousRanking = ranking.slice();
 }
 
-/* ---- mostrar erro ---- */
-function showError(msg) {
-  document.getElementById('rankingContainer').innerHTML =
-    '<div class="error-msg">' +
-    '<p>&#9888;&#65039; ' + msg + '</p>' +
-    '<p style="margin-top:10px;font-size:.85rem;color:rgba(255,255,255,.5)">' +
-    'A planilha precisa estar compartilhada como <strong>"qualquer pessoa com o link pode visualizar"</strong>.<br><br>' +
-    '<a href="https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit" target="_blank">&#128279; Abrir planilha</a>' +
-    ' &rarr; Compartilhar &rarr; Qualquer pessoa com o link &rarr; Leitor' +
-    '</p></div>';
-}
+// ─── INIT ────────────────────────────────────────────────────────────────────
+// Detecta o dia atual para abrir na aba certa
+(function setActiveDay() {
+  const today = new Date().getDate();
+  const idx = [27, 28, 29, 30].indexOf(today);
+  if (idx >= 0) activeDay = idx;
+})();
 
-/* ---- atualizar ---- */
-function updateRanking() {
-  fetchSheetData().then(function(ranking) {
-    if (!ranking || ranking.length === 0) {
-      showError('Nenhum dado encontrado na coluna de vendedores.');
-      return;
-    }
-    if (hasRankingChanged(ranking)) {
-      renderRanking(ranking);
-    } else {
-      var el = document.getElementById('updateTime');
-      if (el) el.textContent = new Date().toLocaleTimeString('pt-BR');
-    }
-  }).catch(function(err) {
-    console.error('Erro:', err);
-    if (previousRanking.length === 0) showError(err.message);
-  });
-}
-
-/* ---- countdown ---- */
-function startCountdown() {
-  countdown = REFRESH_INTERVAL;
-  if (refreshTimer) clearInterval(refreshTimer);
-  refreshTimer = setInterval(function() {
-    countdown--;
-    var el = document.getElementById('refreshSec');
-    if (el) el.textContent = countdown;
-    if (countdown <= 0) {
-      countdown = REFRESH_INTERVAL;
-      updateRanking();
-    }
-  }, 1000);
-}
-
-/* ---- iniciar ---- */
-window.addEventListener('load', function() {
-  createParticles();
-  updateRanking();
-  startCountdown();
-});
-window.addEventListener('focus', function() {
-  countdown = REFRESH_INTERVAL;
-  updateRanking();
-  startCountdown();
-});
+refresh();
+setInterval(refresh, REFRESH_MS);
 </script>
 </body>
 </html>
