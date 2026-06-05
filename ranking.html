@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🏆 Ranking Comercial — Multiluz Solar</title>
+<title>🏆 Ranking Comercial — Expo Inox · Multiluz Solar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -11,37 +11,54 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --gold:#D4A017;--gold2:#F0C040;--navy:#0B0F1E;--card:#141828;
+  --gold:#D4A017;--gold2:#F0C040;--navy:#0B0F1E;
   --accent:#FF6B00;--muted:rgba(255,255,255,0.38);--border:rgba(255,255,255,0.08);
 }
 html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;}
 
 /* HERO */
 .hero{
-  background:linear-gradient(135deg,#0B0F1E 60%,#1a1030);
+  background:linear-gradient(135deg,#0B0F1E 55%,#0d1525);
   border-bottom:1px solid var(--border);
-  padding:2rem 1.5rem 1.5rem;
+  padding:2rem 1.5rem 1.75rem;
   text-align:center;position:relative;overflow:hidden;
 }
 .hero::before{
   content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
-  width:500px;height:260px;
-  background:radial-gradient(ellipse,rgba(212,160,23,0.16) 0%,transparent 70%);
+  width:520px;height:280px;
+  background:radial-gradient(ellipse,rgba(212,160,23,0.14) 0%,transparent 70%);
   pointer-events:none;
 }
-.sun-icon{font-size:28px;display:block;margin-bottom:.5rem;animation:float 4s ease-in-out infinite;}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.expo-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(212,160,23,.1);border:0.5px solid rgba(212,160,23,.3);
+  border-radius:20px;padding:4px 14px;
+  font-size:11px;font-weight:500;color:var(--gold);
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.expo-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:glow 2s ease-in-out infinite;}
+@keyframes glow{0%,100%{opacity:1;box-shadow:0 0 4px var(--gold)}50%{opacity:.4;box-shadow:none}}
+.hero-logo{font-size:36px;display:block;margin-bottom:.4rem;animation:float 4s ease-in-out infinite;}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.hero-eyebrow{font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.4rem;}
+.hero-event{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,4vw,18px);
+  letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:.2rem;
+}
 .hero-title{
-  font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,8vw,64px);
-  letter-spacing:.05em;line-height:1;
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,9vw,72px);
+  letter-spacing:.04em;line-height:.95;
   background:linear-gradient(135deg,#fff 30%,var(--gold2));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:.2rem;
+  margin-bottom:.3rem;
 }
-.hero-sub{font-size:13px;color:var(--muted);margin-bottom:1.25rem;}
+.hero-dates{font-size:13px;color:var(--muted);margin-bottom:1.25rem;letter-spacing:.04em;}
 
-/* LIVE BADGE */
+/* LIVE */
 .live-badge{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(239,68,68,.1);border:0.5px solid rgba(239,68,68,.3);
@@ -49,47 +66,52 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
   margin-bottom:1.25rem;
 }
 .live-dot{width:7px;height:7px;border-radius:50%;background:#ef4444;animation:pulse 1.4s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* STATS */
-.stat-row{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
-  max-width:480px;margin:0 auto;
-}
-.stat{background:rgba(255,255,255,.05);border:0.5px solid var(--border);border-radius:8px;padding:.65rem .5rem;text-align:center;}
-.stat-val{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.04em;}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:480px;margin:0 auto;}
+.stat{background:rgba(255,255,255,.05);border:0.5px solid var(--border);border-radius:10px;padding:.7rem .5rem;text-align:center;}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);letter-spacing:.04em;}
 .stat-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px;}
 
 /* TABS */
 .day-tabs{
-  display:flex;overflow-x:auto;gap:8px;padding:1.25rem 1.25rem .5rem;
+  display:flex;overflow-x:auto;gap:8px;padding:1.25rem 1.25rem .75rem;
   scrollbar-width:none;position:sticky;top:0;z-index:10;
   background:var(--navy);border-bottom:0.5px solid var(--border);
 }
 .day-tabs::-webkit-scrollbar{display:none;}
 .tab{
-  flex-shrink:0;padding:8px 20px;border-radius:20px;
+  flex:1;min-width:0;padding:10px 12px;border-radius:10px;
   font-size:13px;font-weight:500;cursor:pointer;
   border:0.5px solid var(--border);background:transparent;color:var(--muted);
-  transition:all .2s;font-family:'DM Sans',sans-serif;
+  transition:all .2s;font-family:'DM Sans',sans-serif;text-align:center;
 }
-.tab.active{background:var(--gold);color:#1a0a00;border-color:var(--gold);}
-.tab:hover:not(.active){border-color:rgba(212,160,23,.5);color:rgba(255,255,255,.8);}
+.tab.active{
+  background:linear-gradient(135deg,rgba(212,160,23,.2),rgba(212,160,23,.08));
+  border-color:var(--gold);color:var(--gold);
+}
+.tab:hover:not(.active){border-color:rgba(212,160,23,.4);color:rgba(255,255,255,.8);}
+.tab-day{font-family:'Bebas Neue',sans-serif;font-size:22px;display:block;letter-spacing:.04em;line-height:1;}
+.tab-label{font-size:10px;display:block;opacity:.6;margin-top:2px;}
+.tab-count{font-size:11px;display:block;color:var(--accent);margin-top:3px;font-weight:700;}
 
 /* PANEL */
 .panel{padding:1rem 1.25rem 3rem;max-width:680px;margin:0 auto;}
+
+/* DAY HEADER */
 .day-header{
   display:flex;align-items:center;justify-content:space-between;
-  padding:.5rem 0 .75rem;border-bottom:0.5px solid var(--border);margin-bottom:.75rem;
+  padding:.5rem 0 .75rem;border-bottom:0.5px solid var(--border);margin-bottom:1rem;
 }
 .day-header-left{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
 .day-header-right{font-size:11px;color:var(--gold);}
 
 /* PODIUM */
-.podium-wrap{display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:.5rem 0 1.5rem;}
+.podium-wrap{display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:.25rem 0 1.5rem;}
 .pod{flex:1;max-width:120px;text-align:center;}
-.pod-rank{font-size:13px;margin-bottom:4px;color:var(--muted);}
-.pod.p1 .pod-rank{color:var(--gold);font-weight:700;}
+.pod-rank{font-size:12px;margin-bottom:4px;color:var(--muted);}
+.pod.p1 .pod-rank{color:var(--gold);font-weight:700;font-size:14px;}
 .pod-avatar{
   width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -97,30 +119,29 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
   margin:0 auto 6px;border:2px solid;
 }
 .pod.p1 .pod-avatar{background:rgba(212,160,23,.18);border-color:var(--gold);color:var(--gold);}
-.pod.p2 .pod-avatar{background:rgba(180,180,180,.12);border-color:#aaa;color:#ccc;}
-.pod.p3 .pod-avatar{background:rgba(180,100,40,.12);border-color:#b46030;color:#c07040;}
+.pod.p2 .pod-avatar{background:rgba(180,180,180,.1);border-color:#aaa;color:#ccc;}
+.pod.p3 .pod-avatar{background:rgba(180,100,40,.1);border-color:#b46030;color:#c07040;}
 .pod-name{font-size:12px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px;margin:0 auto 3px;font-weight:500;}
 .pod-count{font-size:11px;color:var(--muted);margin-bottom:6px;}
 .pod-bar{border-radius:4px 4px 0 0;width:100%;}
-.pod.p1 .pod-bar{height:80px;background:rgba(212,160,23,.18);border-top:2px solid var(--gold);}
-.pod.p2 .pod-bar{height:58px;background:rgba(180,180,180,.1);border-top:2px solid #aaa;}
-.pod.p3 .pod-bar{height:40px;background:rgba(180,100,40,.1);border-top:2px solid #b46030;}
+.pod.p1 .pod-bar{height:80px;background:rgba(212,160,23,.15);border-top:2px solid var(--gold);}
+.pod.p2 .pod-bar{height:58px;background:rgba(180,180,180,.08);border-top:2px solid #aaa;}
+.pod.p3 .pod-bar{height:40px;background:rgba(180,100,40,.08);border-top:2px solid #b46030;}
 
 /* RANK LIST */
 .rank-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem;}
 .rank-item{
   display:flex;align-items:center;gap:10px;
   background:rgba(255,255,255,.04);border:0.5px solid var(--border);
-  border-radius:8px;padding:9px 12px;
-  transition:background .2s;
+  border-radius:10px;padding:9px 12px;transition:background .15s;
 }
 .rank-item:hover{background:rgba(255,255,255,.07);}
-.rank-item.top1{border-color:rgba(212,160,23,.35);background:rgba(212,160,23,.06);}
+.rank-item.top1{border-color:rgba(212,160,23,.4);background:rgba(212,160,23,.06);}
 .rank-pos{font-family:'Bebas Neue',sans-serif;font-size:17px;min-width:26px;text-align:center;color:var(--muted);}
 .rank-pos.top3{color:var(--gold);}
 .rank-avatar{
   width:34px;height:34px;border-radius:50%;
-  background:rgba(212,160,23,.14);
+  background:rgba(212,160,23,.12);
   display:flex;align-items:center;justify-content:center;
   font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;
 }
@@ -138,34 +159,32 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
 
 /* EMPTY */
 .empty-day{text-align:center;padding:3rem 1rem;}
-.empty-icon{font-size:48px;margin-bottom:.75rem;display:block;opacity:.35;}
-.empty-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.04em;color:var(--gold2);margin-bottom:.6rem;}
-.empty-msg{font-size:14px;color:var(--muted);max-width:280px;margin:0 auto 1.5rem;line-height:1.6;}
-.empty-fire{font-size:22px;letter-spacing:8px;opacity:.6;}
+.empty-icon{font-size:52px;margin-bottom:.75rem;display:block;opacity:.3;}
+.empty-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.04em;color:var(--gold2);margin-bottom:.6rem;}
+.empty-msg{font-size:14px;color:var(--muted);max-width:290px;margin:0 auto 1.5rem;line-height:1.6;}
+.empty-fire{font-size:22px;letter-spacing:8px;opacity:.5;}
 
 /* LOADING */
 .loading{text-align:center;padding:3rem;color:var(--muted);font-size:13px;}
-.loading-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin:0 3px;animation:bounce .9s ease-in-out infinite;}
+.loading-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin:0 3px;animation:bounce .9s ease-in-out infinite;}
 .loading-dot:nth-child(2){animation-delay:.15s;}
 .loading-dot:nth-child(3){animation-delay:.3s;}
 @keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:.4}40%{transform:scale(1);opacity:1}}
 
-/* UPDATE INFO */
+/* UPDATE */
 .update-info{text-align:center;font-size:11px;color:var(--muted);padding:.75rem;border-top:0.5px solid var(--border);margin-top:1rem;}
 
-/* SHIMMER SKELETON */
-.skeleton{
-  background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.05) 75%);
-  background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px;
+/* ERROR */
+.error-box{
+  background:rgba(239,68,68,.08);border:0.5px solid rgba(239,68,68,.3);
+  border-radius:10px;padding:1rem 1.25rem;margin:1rem 0;font-size:12px;color:#f87171;
+  text-align:center;line-height:1.6;
 }
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 @media(max-width:480px){
-  .stat-val{font-size:18px;}
-  .hero-title{font-size:42px;}
-  .pod-bar.p1{height:60px;}
-  .pod-bar.p2{height:44px;}
-  .pod-bar.p3{height:30px;}
+  .hero-title{font-size:48px;}
+  .stat-val{font-size:20px;}
+  .tab-day{font-size:18px;}
 }
 </style>
 </head>
@@ -173,11 +192,12 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
 
 <!-- HERO -->
 <div class="hero">
-  <span class="sun-icon">☀️</span>
-  <div class="hero-eyebrow">Multiluz Solar · Feiraço 2026</div>
-  <div class="hero-title">Ranking Comercial</div>
-  <div class="hero-sub">27 a 30 de maio · 4 dias de batalha</div>
-  <div class="live-badge"><span class="live-dot"></span> Atualiza a cada 30s</div>
+  <div class="expo-badge"><span class="dot"></span>Ao vivo · Expo Inox 2026</div>
+  <span class="hero-logo">🚀</span>
+  <div class="hero-event">Multiluz Solar</div>
+  <div class="hero-title">Expo Inox</div>
+  <div class="hero-dates">05 · 06 · 07 de junho de 2026</div>
+  <div class="live-badge"><span class="live-dot"></span>Atualiza a cada 30s</div>
   <div class="stat-row">
     <div class="stat"><div class="stat-val" id="s-leads">—</div><div class="stat-lbl">Total Leads</div></div>
     <div class="stat"><div class="stat-val" id="s-vend">—</div><div class="stat-lbl">Vendedores</div></div>
@@ -198,87 +218,79 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
 <div class="update-info" id="update-info">Aguardando dados...</div>
 
 <script>
-// ─── CONFIG ────────────────────────────────────────────────────────────────
-const SHEET_ID = '13PL1beQX2VrUfXdm5rLNh3itn6VJKQfCSwr3jv3Qk-A';
+// ─── CONFIG ─────────────────────────────────────────────────────────────────
+const SHEET_ID   = '13PL1beQX2VrUfXdm5rLNh3itn6VJKQfCSwr3jv3Qk-A';
 const SHEET_NAME = 'Respostas ao formulário 1';
-const REFRESH_MS = 30000; // 30 segundos
+const REFRESH_MS = 30000;
+const SHEET_URL  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-// URL pública do Google Sheets (precisa estar publicada: Arquivo > Publicar na web)
-const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
-
-// ─── CONSTANTES ─────────────────────────────────────────────────────────────
-const DAYS = ['27/05','28/05','29/05','30/05'];
-const DAY_LABELS = ['Quarta-feira 27/05','Quinta-feira 28/05','Sexta-feira 29/05','Sábado 30/05'];
-const TAB_LABELS = ['Qua 27','Qui 28','Sex 29','Sáb 30'];
+// ─── DIAS DA EXPO INO ────────────────────────────────────────────────────────
+const DAYS       = ['05/06','06/06','07/06'];
+const DAY_LABELS = ['Sexta-feira, 05 de junho','Sábado, 06 de junho','Domingo, 07 de junho'];
+const TAB_SHORT  = ['Sex','Sáb','Dom'];
+const TAB_NUM    = ['05','06','07'];
 
 const MOTIVATIONS = [
-  { title:'O palco está vazio',  msg:'Nenhum lead ainda — a arena aguarda os guerreiros. Que comece o jogo! 🔥' },
-  { title:'A batalha ainda não chegou', msg:'Silêncio antes da tempestade. Quando abrir, que cada segundo seja uma oportunidade.' },
-  { title:'Aguardando abertura', msg:'Esse dia ainda tá no horizonte. Descanse, afie a faca — porque quando chegar a hora, sem desculpas!' },
-  { title:'Dia final chegando', msg:'O último round está chegando. Quem vai deixar tudo na quadra hoje? Sangue nos olhos! 🏆' },
+  { title:'A largada foi dada!',   msg:'Hoje começa a Expo Inox  Cada lead é um passo para o pódio. Vai com tudo! 🔥' },
+  { title:'Dia 2 — Hora de voar!', msg:'Ontem foi aquecimento. Hoje o ritmo dobra. Quem vai liderar o placar? 🚀' },
+  { title:'Último round!',         msg:'Dia final da Expo Inox  Deixa tudo na arena — sem arrependimento. Bora! ⚡' },
 ];
 
-// ─── NORMALIZAÇÃO DE NOMES ───────────────────────────────────────────────────
+// ─── NORMALIZAÇÃO ────────────────────────────────────────────────────────────
 const NORM_MAP = {
   'yasmim soares':'Yasmin Soares','yasmin soares':'Yasmin Soares','yasmin':'Yasmin Soares',
   'kevson souza':'Kevson Souza','kevson de jesus':'Kevson Souza','kevison':'Kevson Souza',
   'kevison souza':'Kevson Souza','keverson souza':'Kevson Souza','kevson':'Kevson Souza',
-  'raul gandini':'Raul Gandini','raul':'Raul Gandini','rau':'Raul Gandini','raúl gandini':'Raul Gandini','raúl':'Raul Gandini',
+  'raul gandini':'Raul Gandini','raul':'Raul Gandini','rau':'Raul Gandini',
   'daniel roque':'Daniel Roque','daniel rock':'Daniel Roque','daniel oliveira':'Daniel Roque',
-  'marcelo henrique':'Marcelo Henrique','marcelo':'Marcelo',
-  'andré luiz':'André Luiz','andre luiz':'André Luiz','andré luís':'André Luiz','andre luis':'André Luiz',
-  'lincoln':'Lincoln','lincon':'Lincoln','linconl':'Lincoln','lincoln ulhoa':'Lincoln','lincon ulhoa':'Lincoln',
+  'marcelo henrique':'Marcelo Henrique',
+  'andré luiz':'André Luiz','andre luiz':'André Luiz',
+  'lincoln':'Lincoln','lincon':'Lincoln','lincoln ulhoa':'Lincoln',
   'williander':'Williander','wiliander':'Williander','williander aparecido':'Williander',
-  'joão vitor':'João Vitor','joao vitor':'João Vitor','joão victor':'João Vitor','joao victor':'João Vitor',
-  'joão victor':'João Vitor','joão vitor ':'João Vitor',
+  'joão vitor':'João Vitor','joao vitor':'João Vitor','joão victor':'João Vitor',
   'lucas eduardo':'Lucas Eduardo',
-  'humberto':'Humberto','humberto filipe':'Humberto','hunberyo':'Humberto','hunberto':'Humberto',
-  'cícero':'Cícero','cicero':'Cícero','cícero manoel':'Cícero','cicero manoel':'Cícero','cicera':'Cícero',
+  'humberto':'Humberto','humberto filipe':'Humberto','hunberyo':'Humberto',
+  'cícero':'Cícero','cicero':'Cícero','cícero manoel':'Cícero','cicero manoel':'Cícero',
   'rafael dutra':'Rafael Dutra',
   'messias':'Messias','mesias':'Messias','mecias':'Messias',
   'ian almeida':'Ian Almeida',
   'josé miguel':'José Miguel','jose miguel':'José Miguel',
-  'camila':'Camila','camila emanueli':'Camila','kamila':'Camila',
+  'camila':'Camila','camila emanueli':'Camila',
   'rodrigo':'Rodrigo','rodrigo ribas':'Rodrigo',
   'wagner':'Wagner','wagner rodrigues':'Wagner',
-  'maria luiza':'Maria Luiza','maria luiza silva':'Maria Luiza','luiza':'Maria Luiza',
-  'henrique':'Henrique','henrique angelo':'Henrique','vendedor henrique':'Henrique',
-  'charles':'Charles','jarles':'Charles',
-  'edmundo':'Edmundo','edmundo de araújo':'Edmundo','edmundo de araujo':'Edmundo',
+  'maria luiza':'Maria Luiza','maria luiza silva':'Maria Luiza',
+  'henrique':'Henrique','henrique angelo':'Henrique',
+  'charles':'Charles','charles william':'Charles William',
+  'edmundo':'Edmundo','edmundo de araújo':'Edmundo',
   'aline':'Aline','aline fácil':'Aline','aline facil':'Aline',
   'douglas':'Douglas','douglas rodrigues':'Douglas',
-  'jhonatan':'Jhonatan','jonatan':'Jhonatan','jonathan':'Jhonatan','jhonatan andrade':'Jhonatan',
-  'lucas':'Lucas','lucas souza':'Lucas','lucas basso':'Lucas',
-  'césar':'César','cesar':'César','cesar augusto':'César','césar mf':'César',
-  'césar solar':'César','cesar mf':'César','césar cliente quer visita':'César',
-  'césar ligar daqui a 14 dias':'César','césar aumento usina':'César',
-  'bruno':'Bruno',
-  'renato':'Renato','david':'David','lee':'Lee','lee van cleff':'Lee',
-  'marcos':'Marcos','bruno':'Bruno',
-  'rafael':'Rafael Dutra',
-  'cícero manoel':'Cícero',
+  'jhonatan':'Jhonatan','jonathan':'Jhonatan',
+  'lucas':'Lucas',
+  'césar':'César','cesar':'César','cesar augusto':'César',
+  'bruno':'Bruno','renato':'Renato','david':'David','lee':'Lee',
+  'marcos':'Marcos','luciano alves':'Luciano Alves','luciano':'Luciano Alves',
+  'vitor':'Vitor','victor':'Vitor',
+  'raissa':'Raissa','raissa franco':'Raissa',
+  'marcelo':'Marcelo',
 };
 
 function normalizeName(raw) {
   if (!raw || !raw.trim()) return null;
   const clean = raw.trim().toLowerCase().replace(/\s+/g,' ');
-  // ignora entradas claramente inválidas
   if (clean.length < 2) return null;
-  if (clean.includes('@')) return null; // email no campo
-  if (/^\d+$/.test(clean)) return null; // só número
-  if (['nao sei','não sei','teste','eu'].includes(clean)) return null;
+  if (clean.includes('@')) return null;
+  if (/^\d+$/.test(clean)) return null;
+  if (['nao sei','não sei','teste','eu','ótimo','otimo'].includes(clean)) return null;
   if (clean.startsWith('não teve')) return null;
-  return NORM_MAP[clean] || raw.trim().split(' ').slice(0,2).map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' ');
+  return NORM_MAP[clean] || raw.trim().split(' ').slice(0,2)
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
 }
 
 function getDay(ts) {
-  // ts format: "27/05/2026 18:55:31" or "2026-05-27T18:55:31"
   if (!ts) return null;
   const s = String(ts);
-  // tenta dd/mm/aaaa
   const m1 = s.match(/^(\d{2})\/(\d{2})/);
   if (m1) return m1[1]+'/'+m1[2];
-  // tenta aaaa-mm-dd
   const m2 = s.match(/(\d{4})-(\d{2})-(\d{2})/);
   if (m2) return m2[3]+'/'+m2[2];
   return null;
@@ -288,40 +300,33 @@ function initials(name) {
   return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
 }
 
-// ─── ESTADO GLOBAL ──────────────────────────────────────────────────────────
+// ─── ESTADO ──────────────────────────────────────────────────────────────────
 let activeDay = 0;
-let rankings = {};
-let allData = [];
+let rankings  = {};
+let allData   = [];
 let chartInst = null;
 
-// ─── FETCH PLANILHA ─────────────────────────────────────────────────────────
+// ─── FETCH ───────────────────────────────────────────────────────────────────
 async function fetchSheet() {
   try {
-    const res = await fetch(SHEET_URL + '&rand=' + Date.now());
+    const res  = await fetch(SHEET_URL + '&rand=' + Date.now());
     const text = await res.text();
-    // Google retorna: google.visualization.Query.setResponse({...});
     const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?\s*$/, ''));
-    return parseGVizResponse(json);
+    return parseGViz(json);
   } catch(e) {
-    console.error('Erro ao buscar planilha:', e);
+    console.error('Erro fetch:', e);
     return null;
   }
 }
 
-function parseGVizResponse(json) {
+function parseGViz(json) {
   const rows = json.table?.rows || [];
-  const data = [];
-  rows.forEach(row => {
+  return rows.map(row => {
     const cells = row.c || [];
-    // col 0 = timestamp, col 6 = vendedor (índice 6)
-    const tsCell = cells[0];
-    const vendCell = cells[6];
-    if (!tsCell) return;
-    const ts = tsCell.f || tsCell.v || '';
-    const vend = vendCell ? (vendCell.v || '') : '';
-    data.push([String(ts), String(vend)]);
+    const ts    = cells[0] ? String(cells[0].f || cells[0].v || '') : '';
+    const vend  = cells[6] ? String(cells[6].v || '') : '';
+    return [ts, vend];
   });
-  return data;
 }
 
 function buildRankings(data) {
@@ -338,56 +343,57 @@ function buildRankings(data) {
 }
 
 function sortRank(obj) {
-  return Object.entries(obj).sort((a, b) => b[1] - a[1]);
+  return Object.entries(obj).sort((a,b) => b[1]-a[1]);
 }
 
-// ─── STATS GLOBAIS ──────────────────────────────────────────────────────────
+// ─── STATS ───────────────────────────────────────────────────────────────────
 function updateStats(data, rankings) {
-  const total = data.filter(([,raw]) => normalizeName(raw)).length;
-  const vSet = new Set();
+  const total = data.filter(([,r]) => normalizeName(r)).length;
+  const vSet  = new Set();
   DAYS.forEach(d => Object.keys(rankings[d]).forEach(n => vSet.add(n)));
-
-  const all = {};
-  DAYS.forEach(d => {
-    Object.entries(rankings[d]).forEach(([n,c]) => { all[n] = (all[n]||0)+c; });
-  });
-  const top = Object.entries(all).sort((a,b)=>b[1]-a[1]);
+  const all   = {};
+  DAYS.forEach(d => Object.entries(rankings[d]).forEach(([n,c]) => { all[n]=(all[n]||0)+c; }));
+  const top   = Object.entries(all).sort((a,b) => b[1]-a[1]);
   const lider = top.length ? top[0][0].split(' ')[0] : '—';
-
-  document.getElementById('s-leads').textContent = total;
-  document.getElementById('s-vend').textContent = vSet.size;
+  document.getElementById('s-leads').textContent = total || '—';
+  document.getElementById('s-vend').textContent  = vSet.size || '—';
   document.getElementById('s-lider').textContent = lider;
 }
 
-// ─── RENDER TABS ────────────────────────────────────────────────────────────
+// ─── TABS ─────────────────────────────────────────────────────────────────────
 function renderTabs() {
   const wrap = document.getElementById('tabs');
   wrap.innerHTML = '';
   DAYS.forEach((d, i) => {
-    const btn = document.createElement('button');
+    const count = Object.values(rankings[d] || {}).reduce((a,b)=>a+b, 0);
+    const btn   = document.createElement('button');
     btn.className = 'tab' + (i === activeDay ? ' active' : '');
-    const count = Object.values(rankings[d] || {}).reduce((a,b)=>a+b,0);
-    btn.innerHTML = TAB_LABELS[i] + (count > 0 ? ` <span style="font-size:10px;opacity:.6">(${count})</span>` : '');
+    btn.innerHTML = `
+      <span class="tab-day">${TAB_NUM[i]}</span>
+      <span class="tab-label">${TAB_SHORT[i]} · Jun</span>
+      ${count > 0 ? `<span class="tab-count">${count} leads</span>` : '<span class="tab-count" style="opacity:.3">—</span>'}
+    `;
     btn.onclick = () => { activeDay = i; renderTabs(); renderPanel(); };
     wrap.appendChild(btn);
   });
 }
 
-// ─── RENDER PANEL ───────────────────────────────────────────────────────────
+// ─── PANEL ───────────────────────────────────────────────────────────────────
 function renderPanel() {
   if (chartInst) { chartInst.destroy(); chartInst = null; }
-  const panel = document.getElementById('panel-content');
+  const panel  = document.getElementById('panel-content');
   panel.innerHTML = '';
 
-  const day = DAYS[activeDay];
-  const rank = sortRank(rankings[day] || {});
-  const hasData = rank.length > 0;
-  const totalDay = rank.reduce((a, b) => a + b[1], 0);
+  const day      = DAYS[activeDay];
+  const rank     = sortRank(rankings[day] || {});
+  const hasData  = rank.length > 0;
+  const totalDay = rank.reduce((a,b) => a+b[1], 0);
 
-  // Header
+  // header
   const hdr = document.createElement('div');
   hdr.className = 'day-header';
-  hdr.innerHTML = `<span class="day-header-left">${DAY_LABELS[activeDay]}</span>
+  hdr.innerHTML = `
+    <span class="day-header-left">${DAY_LABELS[activeDay]}</span>
     <span class="day-header-right">${hasData ? rank.length+' vendedores · '+totalDay+' leads' : 'Aguardando...'}</span>`;
   panel.appendChild(hdr);
 
@@ -406,19 +412,19 @@ function renderPanel() {
 
   const maxC = rank[0][1];
 
-  // PÓDIO (top 3)
+  // pódio
   if (rank.length >= 2) {
-    const pw = document.createElement('div');
+    const pw    = document.createElement('div');
     pw.className = 'podium-wrap';
     const order = rank.length >= 3
-      ? [[rank[1], 2, 'p2'], [rank[0], 1, 'p1'], [rank[2], 3, 'p3']]
-      : [[null, 2, 'p2'], [rank[0], 1, 'p1'], [null, 3, 'p3']];
-    order.forEach(([entry, pos, cls]) => {
+      ? [[rank[1],2,'p2'],[rank[0],1,'p1'],[rank[2],3,'p3']]
+      : [[null,2,'p2'],[rank[0],1,'p1'],[null,3,'p3']];
+    order.forEach(([entry,pos,cls]) => {
       const pod = document.createElement('div');
       pod.className = `pod ${cls}`;
-      if (!entry) { pod.innerHTML = '<div class="pod-bar"></div>'; pw.appendChild(pod); return; }
-      const [name, count] = entry;
-      const medals = ['', '👑 1°', '2°', '3°'];
+      if (!entry) { pod.innerHTML='<div class="pod-bar"></div>'; pw.appendChild(pod); return; }
+      const [name,count] = entry;
+      const medals = ['','👑 1°','2°','3°'];
       pod.innerHTML = `
         <div class="pod-rank">${medals[pos]}</div>
         <div class="pod-avatar">${initials(name)}</div>
@@ -430,19 +436,19 @@ function renderPanel() {
     panel.appendChild(pw);
   }
 
-  // LISTA
+  // lista
   const list = document.createElement('div');
   list.className = 'rank-list';
-  rank.forEach(([name, count], i) => {
+  rank.forEach(([name,count],i) => {
     const item = document.createElement('div');
-    item.className = 'rank-item' + (i === 0 ? ' top1' : '');
-    const pct = Math.round((count / maxC) * 100);
+    item.className = 'rank-item' + (i===0 ? ' top1' : '');
+    const pct = Math.round((count/maxC)*100);
     item.innerHTML = `
-      <span class="rank-pos ${i < 3 ? 'top3' : ''}">${i + 1}</span>
+      <span class="rank-pos ${i<3?'top3':''}">${i+1}</span>
       <div class="rank-avatar">${initials(name)}</div>
       <div class="rank-info">
         <div class="rank-name">${name}</div>
-        <div class="rank-sub">${count} lead${count > 1 ? 's' : ''} capturado${count > 1 ? 's' : ''}</div>
+        <div class="rank-sub">${count} lead${count>1?'s':''} capturado${count>1?'s':''}</div>
       </div>
       <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:${pct}%"></div></div>
       <span class="rank-count">${count}</span>`;
@@ -450,16 +456,16 @@ function renderPanel() {
   });
   panel.appendChild(list);
 
-  // GRÁFICO
+  // gráfico
   if (rank.length > 0) {
-    const top = rank.slice(0, 15);
+    const top = rank.slice(0,15);
     const sec = document.createElement('div');
     sec.className = 'chart-section';
-    sec.innerHTML = `<div class="chart-title">Visão geral do dia</div>`;
+    sec.innerHTML = '<div class="chart-title">Visão geral do dia</div>';
     const cw = document.createElement('div');
     cw.className = 'chart-wrap';
-    cw.style.height = (Math.min(top.length, 15) * 40 + 60) + 'px';
-    cw.innerHTML = `<canvas id="dayChart" role="img" aria-label="Gráfico de leads por vendedor no dia ${day}"></canvas>`;
+    cw.style.height = (Math.min(top.length,15)*40+60)+'px';
+    cw.innerHTML = `<canvas id="dayChart" role="img" aria-label="Gráfico leads por vendedor"></canvas>`;
     sec.appendChild(cw);
     panel.appendChild(sec);
 
@@ -472,18 +478,20 @@ function renderPanel() {
           labels: top.map(([n]) => n.split(' ')[0]),
           datasets: [{
             label: 'Leads',
-            data: top.map(([, c]) => c),
-            backgroundColor: top.map((_, i) => i === 0 ? 'rgba(212,160,23,0.85)' : i < 3 ? 'rgba(212,160,23,0.5)' : 'rgba(255,107,0,0.35)'),
-            borderColor: top.map((_, i) => i === 0 ? '#D4A017' : i < 3 ? 'rgba(212,160,23,0.7)' : 'rgba(255,107,0,0.6)'),
-            borderWidth: 1, borderRadius: 4,
+            data: top.map(([,c]) => c),
+            backgroundColor: top.map((_,i) =>
+              i===0 ? 'rgba(212,160,23,0.85)' : i<3 ? 'rgba(212,160,23,0.5)' : 'rgba(255,107,0,0.35)'),
+            borderColor: top.map((_,i) =>
+              i===0 ? '#D4A017' : i<3 ? 'rgba(212,160,23,0.7)' : 'rgba(255,107,0,0.6)'),
+            borderWidth:1, borderRadius:4,
           }]
         },
         options: {
-          indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
+          indexAxis:'y', responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{ display:false } },
           scales: {
-            x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 } } },
-            y: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.75)', font: { size: 12 } } }
+            x:{ grid:{ color:'rgba(255,255,255,0.06)' }, ticks:{ color:'rgba(255,255,255,0.45)', font:{size:11} } },
+            y:{ grid:{ display:false }, ticks:{ color:'rgba(255,255,255,0.75)', font:{size:12} } }
           }
         }
       });
@@ -491,12 +499,12 @@ function renderPanel() {
   }
 }
 
-// ─── CICLO PRINCIPAL ─────────────────────────────────────────────────────────
+// ─── REFRESH ─────────────────────────────────────────────────────────────────
 async function refresh() {
   const data = await fetchSheet();
   if (data && data.length > 0) {
-    allData = data;
-    rankings = buildRankings(data);
+    allData   = data;
+    rankings  = buildRankings(data);
     updateStats(data, rankings);
     renderTabs();
     renderPanel();
@@ -505,17 +513,29 @@ async function refresh() {
       `Atualizado às ${now.toLocaleTimeString('pt-BR')} · próxima atualização em 30s`;
   } else {
     document.getElementById('update-info').textContent =
-      '⚠ Não foi possível carregar os dados. Verifique se a planilha está publicada.';
+      '⚠ Não foi possível carregar. Verifique se a planilha está publicada em: Arquivo → Publicar na web';
+    // mostra estado inicial mesmo sem dados
+    if (!allData.length) {
+      rankings = {};
+      DAYS.forEach(d => { rankings[d] = {}; });
+      renderTabs();
+      renderPanel();
+    }
   }
 }
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
-// Detecta o dia atual para abrir na aba certa
+// ─── INIT ─────────────────────────────────────────────────────────────────────
 (function setActiveDay() {
   const today = new Date().getDate();
-  const idx = [27, 28, 29, 30].indexOf(today);
+  const idx   = [5, 6, 7].indexOf(today);
   if (idx >= 0) activeDay = idx;
 })();
+
+// estado inicial vazio para não ficar só com loading
+rankings = {};
+DAYS.forEach(d => { rankings[d] = {}; });
+renderTabs();
+renderPanel();
 
 refresh();
 setInterval(refresh, REFRESH_MS);
