@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏆 Ranking Comercial — Expo Inox · Multiluz Solar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#D4A017;--gold2:#F0C040;--navy:#0B0F1E;
+  --accent:#FF6B00;--muted:rgba(255,255,255,0.38);--border:rgba(255,255,255,0.08);
+}
+html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;}
+.hero{
+  background:linear-gradient(135deg,#0B0F1E 55%,#0d1525);
+  border-bottom:1px solid var(--border);
+  padding:2rem 1.5rem 1.75rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:520px;height:280px;
+  background:radial-gradient(ellipse,rgba(212,160,23,0.14) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.expo-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(212,160,23,.1);border:0.5px solid rgba(212,160,23,.3);
+  border-radius:20px;padding:4px 14px;
+  font-size:11px;font-weight:500;color:var(--gold);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;
+}
+.expo-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:glow 2s ease-in-out infinite;}
+@keyframes glow{0%,100%{opacity:1;box-shadow:0 0 4px var(--gold)}50%{opacity:.4;box-shadow:none}}
+.hero-logo{font-size:36px;display:block;margin-bottom:.4rem;animation:float 4s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero-event{font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,4vw,18px);letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:.2rem;}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,9vw,72px);
+  letter-spacing:.04em;line-height:.95;
+  background:linear-gradient(135deg,#fff 30%,var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.3rem;
+}
+.hero-dates{font-size:13px;color:var(--muted);margin-bottom:1.25rem;letter-spacing:.04em;}
+.live-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(239,68,68,.1);border:0.5px solid rgba(239,68,68,.3);
+  border-radius:20px;padding:4px 12px;font-size:11px;color:#f87171;margin-bottom:1.25rem;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#ef4444;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:480px;margin:0 auto;}
+.stat{background:rgba(255,255,255,.05);border:0.5px solid var(--border);border-radius:10px;padding:.7rem .5rem;text-align:center;}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);letter-spacing:.04em;}
+.stat-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px;}
+.day-tabs{
+  display:flex;overflow-x:auto;gap:8px;padding:1.25rem 1.25rem .75rem;
+  scrollbar-width:none;position:sticky;top:0;z-index:10;
+  background:var(--navy);border-bottom:0.5px solid var(--border);
+}
+.day-tabs::-webkit-scrollbar{display:none;}
+.tab{
+  flex:1;min-width:0;padding:10px 12px;border-radius:10px;
+  font-size:13px;font-weight:500;cursor:pointer;
+  border:0.5px solid var(--border);background:transparent;color:var(--muted);
+  transition:all .2s;font-family:'DM Sans',sans-serif;text-align:center;
+}
+.tab.active{background:linear-gradient(135deg,rgba(212,160,23,.2),rgba(212,160,23,.08));border-color:var(--gold);color:var(--gold);}
+.tab:hover:not(.active){border-color:rgba(212,160,23,.4);color:rgba(255,255,255,.8);}
+.tab-day{font-family:'Bebas Neue',sans-serif;font-size:22px;display:block;letter-spacing:.04em;line-height:1;}
+.tab-label{font-size:10px;display:block;opacity:.6;margin-top:2px;}
+.tab-count{font-size:11px;display:block;color:var(--accent);margin-top:3px;font-weight:700;}
+.panel{padding:1rem 1.25rem 3rem;max-width:680px;margin:0 auto;}
+.day-header{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0 .75rem;border-bottom:0.5px solid var(--border);margin-bottom:1rem;}
+.day-header-left{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+.day-header-right{font-size:11px;color:var(--gold);}
+.podium-wrap{display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:.25rem 0 1.5rem;}
+.pod{flex:1;max-width:120px;text-align:center;}
+.pod-rank{font-size:12px;margin-bottom:4px;color:var(--muted);}
+.pod.p1 .pod-rank{color:var(--gold);font-weight:700;font-size:14px;}
+.pod-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;margin:0 auto 6px;border:2px solid;}
+.pod.p1 .pod-avatar{background:rgba(212,160,23,.18);border-color:var(--gold);color:var(--gold);}
+.pod.p2 .pod-avatar{background:rgba(180,180,180,.1);border-color:#aaa;color:#ccc;}
+.pod.p3 .pod-avatar{background:rgba(180,100,40,.1);border-color:#b46030;color:#c07040;}
+.pod-name{font-size:12px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px;margin:0 auto 3px;font-weight:500;}
+.pod-count{font-size:11px;color:var(--muted);margin-bottom:6px;}
+.pod-bar{border-radius:4px 4px 0 0;width:100%;}
+.pod.p1 .pod-bar{height:80px;background:rgba(212,160,23,.15);border-top:2px solid var(--gold);}
+.pod.p2 .pod-bar{height:58px;background:rgba(180,180,180,.08);border-top:2px solid #aaa;}
+.pod.p3 .pod-bar{height:40px;background:rgba(180,100,40,.08);border-top:2px solid #b46030;}
+.rank-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem;}
+.rank-item{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:0.5px solid var(--border);border-radius:10px;padding:9px 12px;transition:background .15s;}
+.rank-item:hover{background:rgba(255,255,255,.07);}
+.rank-item.top1{border-color:rgba(212,160,23,.4);background:rgba(212,160,23,.06);}
+.rank-pos{font-family:'Bebas Neue',sans-serif;font-size:17px;min-width:26px;text-align:center;color:var(--muted);}
+.rank-pos.top3{color:var(--gold);}
+.rank-avatar{width:34px;height:34px;border-radius:50%;background:rgba(212,160,23,.12);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.rank-info{flex:1;min-width:0;}
+.rank-name{font-size:13px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rank-sub{font-size:11px;color:var(--muted);}
+.rank-bar-wrap{width:72px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.rank-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--accent));}
+.rank-count{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);min-width:32px;text-align:right;}
+.chart-section{margin-top:1rem;}
+.chart-title{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem;}
+.chart-wrap{position:relative;width:100%;}
+.empty-day{text-align:center;padding:3rem 1rem;}
+.empty-icon{font-size:52px;margin-bottom:.75rem;display:block;opacity:.3;}
+.empty-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.04em;color:var(--gold2);margin-bottom:.6rem;}
+.empty-msg{font-size:14px;color:var(--muted);max-width:290px;margin:0 auto 1.5rem;line-height:1.6;}
+.empty-fire{font-size:22px;letter-spacing:8px;opacity:.5;}
+.loading{text-align:center;padding:3rem;color:var(--muted);font-size:13px;}
+.loading-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin:0 3px;animation:bounce .9s ease-in-out infinite;}
+.loading-dot:nth-child(2){animation-delay:.15s;}
+.loading-dot:nth-child(3){animation-delay:.3s;}
+@keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:.4}40%{transform:scale(1);opacity:1}}
+.update-info{text-align:center;font-size:11px;color:var(--muted);padding:.75rem;border-top:0.5px solid var(--border);margin-top:1rem;}
+.debug-box{background:rgba(255,107,0,.08);border:0.5px solid rgba(255,107,0,.3);border-radius:8px;padding:.75rem;margin:1rem 0;font-size:11px;color:rgba(255,107,0,.8);font-family:monospace;line-height:1.6;word-break:break-all;}
+@media(max-width:480px){.hero-title{font-size:48px;}.stat-val{font-size:20px;}.tab-day{font-size:18px;}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="expo-badge"><span class="dot"></span>Ao vivo · Expo Inox 2026</div>
+  <span class="hero-logo">🚀</span>
+  <div class="hero-event">Multiluz Solar</div>
+  <div class="hero-title">Expo Inox</div>
+  <div class="hero-dates">04 · 05 · 06 de junho de 2026</div>
+  <div class="live-badge"><span class="live-dot"></span>Atualiza a cada 30s</div>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-val" id="s-leads">—</div><div class="stat-lbl">Total Leads</div></div>
+    <div class="stat"><div class="stat-val" id="s-vend">—</div><div class="stat-lbl">Vendedores</div></div>
+    <div class="stat"><div class="stat-val" id="s-lider">—</div><div class="stat-lbl">Líder Geral</div></div>
+  </div>
+</div>
+
+<div class="day-tabs" id="tabs"></div>
+<div class="panel" id="panel-content">
+  <div class="loading">
+    <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
+    <p style="margin-top:.75rem;">Carregando dados...</p>
+  </div>
+</div>
+<div class="update-info" id="update-info">Aguardando dados...</div>
+
+<script>
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
+const SHEET_ID   = '13PL1beQX2VrUfXdm5rLNh3itn6VJKQfCSwr3jv3Qk-A';
+const SHEET_NAME = 'Respostas ao formulário 1';
+const REFRESH_MS = 30000;
+const SHEET_URL  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+// ─── DIAS DA EXPO INOX ────────────────────────────────────────────────────────
+// Chave = como vamos identificar o dia internamente
+const DAYS       = ['04/06','05/06','06/06'];
+const DAY_LABELS = ['Quinta-feira, 04 de junho','Sexta-feira, 05 de junho','Sábado, 06 de junho'];
+const TAB_SHORT  = ['Qui','Sex','Sáb'];
+const TAB_NUM    = ['04','05','06'];
+
+// Todas as variações de data que o Google Sheets pode retornar para cada dia
+// O GViz pode retornar: "4/6/2026", "04/06/2026", "2026-06-04", "Date(2026,5,4)" etc.
+const DAY_MATCHERS = [
+  // dia 04/06/2026
+  (s) => /\b4\/6\/2026\b/.test(s)  || /\b04\/06\/2026\b/.test(s) ||
+         /2026-06-04/.test(s)       || /Date\(2026,5,4\)/.test(s) ||
+         /\b4\/06\/2026\b/.test(s)  || /\b04\/6\/2026\b/.test(s),
+  // dia 05/06/2026
+  (s) => /\b5\/6\/2026\b/.test(s)  || /\b05\/06\/2026\b/.test(s) ||
+         /2026-06-05/.test(s)       || /Date\(2026,5,5\)/.test(s) ||
+         /\b5\/06\/2026\b/.test(s)  || /\b05\/6\/2026\b/.test(s),
+  // dia 06/06/2026
+  (s) => /\b6\/6\/2026\b/.test(s)  || /\b06\/06\/2026\b/.test(s) ||
+         /2026-06-06/.test(s)       || /Date\(2026,5,6\)/.test(s) ||
+         /\b6\/06\/2026\b/.test(s)  || /\b06\/6\/2026\b/.test(s),
+];
+
+const MOTIVATIONS = [
+  { title:'A largada foi dada!',    msg:'Hoje começa a Expo Inox. Cada lead é um passo para o pódio. Vai com tudo! 🔥' },
+  { title:'Dia 2 — Hora de voar!',  msg:'Ontem foi aquecimento. Hoje o ritmo dobra. Quem vai liderar o placar? 🚀' },
+  { title:'Último round!',          msg:'Dia final da Expo Inox. Deixa tudo na arena — sem arrependimento. Bora! ⚡' },
+];
+
+// ─── NORMALIZAÇÃO ─────────────────────────────────────────────────────────────
+const NORM_MAP = {
+  'yasmim soares':'Yasmin Soares','yasmin soares':'Yasmin Soares','yasmin':'Yasmin Soares',
+  'kevson souza':'Kevson Souza','kevson de jesus':'Kevson Souza','kevison':'Kevson Souza',
+  'kevison souza':'Kevson Souza','keverson souza':'Kevson Souza','kevson':'Kevson Souza',
+  'raul gandini':'Raul Gandini','raul':'Raul Gandini','rau':'Raul Gandini',
+  'daniel roque':'Daniel Roque','daniel rock':'Daniel Roque','daniel oliveira':'Daniel Roque',
+  'marcelo henrique':'Marcelo Henrique',
+  'andré luiz':'André Luiz','andre luiz':'André Luiz',
+  'lincoln':'Lincoln','lincon':'Lincoln','lincoln ulhoa':'Lincoln',
+  'williander':'Williander','wiliander':'Williander','williander aparecido':'Williander',
+  'joão vitor':'João Vitor','joao vitor':'João Vitor','joão victor':'João Vitor',
+  'lucas eduardo':'Lucas Eduardo',
+  'humberto':'Humberto','humberto filipe':'Humberto','hunberyo':'Humberto',
+  'cícero':'Cícero','cicero':'Cícero','cícero manoel':'Cícero','cicero manoel':'Cícero',
+  'rafael dutra':'Rafael Dutra',
+  'messias':'Messias','mesias':'Messias','mecias':'Messias',
+  'ian almeida':'Ian Almeida',
+  'josé miguel':'José Miguel','jose miguel':'José Miguel',
+  'camila':'Camila','camila emanueli':'Camila',
+  'rodrigo':'Rodrigo','rodrigo ribas':'Rodrigo',
+  'wagner':'Wagner','wagner rodrigues':'Wagner',
+  'maria luiza':'Maria Luiza','maria luiza silva':'Maria Luiza',
+  'henrique':'Henrique','henrique angelo':'Henrique',
+  'charles':'Charles','charles william':'Charles William',
+  'edmundo':'Edmundo','edmundo de araújo':'Edmundo',
+  'aline':'Aline','aline fácil':'Aline','aline facil':'Aline',
+  'douglas':'Douglas','douglas rodrigues':'Douglas',
+  'jhonatan':'Jhonatan','jonathan':'Jhonatan',
+  'lucas':'Lucas',
+  'césar':'César','cesar':'César','cesar augusto':'César',
+  'bruno':'Bruno','renato':'Renato','david':'David','lee':'Lee',
+  'marcos':'Marcos','luciano alves':'Luciano Alves','luciano':'Luciano Alves',
+  'vitor':'Vitor','victor':'Vitor',
+  'raissa':'Raissa','raissa franco':'Raissa',
+  'marcelo':'Marcelo',
+};
+
+function normalizeName(raw) {
+  if (!raw || !raw.trim()) return null;
+  const clean = raw.trim().toLowerCase().replace(/\s+/g,' ');
+  if (clean.length < 2) return null;
+  if (clean.includes('@')) return null;
+  if (/^\d+$/.test(clean)) return null;
+  if (['nao sei','não sei','teste','eu','ótimo','otimo'].includes(clean)) return null;
+  if (clean.startsWith('não teve')) return null;
+  return NORM_MAP[clean] || raw.trim().split(' ').slice(0,2)
+    .map(w => w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' ');
+}
+
+function matchDay(ts) {
+  // ts pode ser string formatada ou valor bruto do gviz
+  const s = String(ts || '');
+  for (let i = 0; i < DAY_MATCHERS.length; i++) {
+    if (DAY_MATCHERS[i](s)) return i;
+  }
+  return -1;
+}
+
+function initials(name) {
+  return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+}
+
+// ─── ESTADO ───────────────────────────────────────────────────────────────────
+let activeDay  = 0;
+let rankings   = { 0:{}, 1:{}, 2:{} };
+let allData    = [];
+let chartInst  = null;
+let lastSample = '';   // para debug
+
+// ─── FETCH ────────────────────────────────────────────────────────────────────
+async function fetchSheet() {
+  try {
+    const res  = await fetch(SHEET_URL + '&rand=' + Date.now());
+    const text = await res.text();
+    const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?\s*$/, ''));
+    return parseGViz(json);
+  } catch(e) {
+    console.error('Erro fetch:', e);
+    return null;
+  }
+}
+
+function parseGViz(json) {
+  const rows = json.table?.rows || [];
+  const data = [];
+  rows.forEach(row => {
+    const cells = row.c || [];
+    if (!cells[0]) return;
+    // Pega AMBOS: valor formatado (f) e valor bruto (v) para maximizar chances de match
+    const tsF = cells[0].f ? String(cells[0].f) : '';
+    const tsV = cells[0].v ? String(cells[0].v) : '';
+    const vend = cells[6] ? String(cells[6].v || '') : '';
+    data.push([tsF, tsV, vend]);
+  });
+  // salva amostra para debug
+  if (data.length > 0) {
+    lastSample = `Total linhas: ${data.length} | Exemplo ts: f="${data[data.length-1][0]}" v="${data[data.length-1][1]}"`;
+  }
+  return data;
+}
+
+function buildRankings(data) {
+  const byDay = {0:{}, 1:{}, 2:{}};
+  let matched = 0, unmatched = 0;
+  data.forEach(([tsF, tsV, rawVend]) => {
+    // tenta match nos dois formatos
+    let idx = matchDay(tsF);
+    if (idx < 0) idx = matchDay(tsV);
+    if (idx < 0) { unmatched++; return; }
+    matched++;
+    const name = normalizeName(rawVend);
+    if (!name) return;
+    byDay[idx][name] = (byDay[idx][name] || 0) + 1;
+  });
+  console.log(`Matched: ${matched} | Unmatched: ${unmatched}`);
+  return byDay;
+}
+
+function sortRank(obj) {
+  return Object.entries(obj).sort((a,b) => b[1]-a[1]);
+}
+
+// ─── STATS ────────────────────────────────────────────────────────────────────
+function updateStats(rankings) {
+  let total = 0;
+  const vSet = new Set();
+  const all  = {};
+  [0,1,2].forEach(i => {
+    Object.entries(rankings[i]).forEach(([n,c]) => {
+      total += c;
+      vSet.add(n);
+      all[n] = (all[n]||0)+c;
+    });
+  });
+  const top   = Object.entries(all).sort((a,b)=>b[1]-a[1]);
+  const lider = top.length ? top[0][0].split(' ')[0] : '—';
+  document.getElementById('s-leads').textContent = total || '—';
+  document.getElementById('s-vend').textContent  = vSet.size || '—';
+  document.getElementById('s-lider').textContent = lider;
+}
+
+// ─── TABS ─────────────────────────────────────────────────────────────────────
+function renderTabs() {
+  const wrap = document.getElementById('tabs');
+  wrap.innerHTML = '';
+  [0,1,2].forEach(i => {
+    const count = Object.values(rankings[i]||{}).reduce((a,b)=>a+b, 0);
+    const btn   = document.createElement('button');
+    btn.className = 'tab' + (i===activeDay ? ' active' : '');
+    btn.innerHTML = `
+      <span class="tab-day">${TAB_NUM[i]}</span>
+      <span class="tab-label">${TAB_SHORT[i]} · Jun</span>
+      ${count > 0
+        ? `<span class="tab-count">${count} leads</span>`
+        : `<span class="tab-count" style="opacity:.3">—</span>`}`;
+    btn.onclick = () => { activeDay=i; renderTabs(); renderPanel(); };
+    wrap.appendChild(btn);
+  });
+}
+
+// ─── PANEL ────────────────────────────────────────────────────────────────────
+function renderPanel() {
+  if (chartInst) { chartInst.destroy(); chartInst=null; }
+  const panel    = document.getElementById('panel-content');
+  panel.innerHTML = '';
+
+  const rank     = sortRank(rankings[activeDay]||{});
+  const hasData  = rank.length > 0;
+  const totalDay = rank.reduce((a,b)=>a+b[1], 0);
+
+  const hdr = document.createElement('div');
+  hdr.className = 'day-header';
+  hdr.innerHTML = `
+    <span class="day-header-left">${DAY_LABELS[activeDay]}</span>
+    <span class="day-header-right">${hasData ? rank.length+' vendedores · '+totalDay+' leads' : 'Aguardando...'}</span>`;
+  panel.appendChild(hdr);
+
+  if (!hasData) {
+    const mi = MOTIVATIONS[activeDay];
+    const empty = document.createElement('div');
+    empty.className = 'empty-day';
+    empty.innerHTML = `
+      <span class="empty-icon">⚡</span>
+      <div class="empty-title">${mi.title}</div>
+      <p class="empty-msg">${mi.msg}</p>
+      <div class="empty-fire">🔥 🔥 🔥</div>`;
+    panel.appendChild(empty);
+
+    // mostra debug se tiver dados mas não matchou nenhum
+    if (allData.length > 0 && lastSample) {
+      const dbg = document.createElement('div');
+      dbg.className = 'debug-box';
+      dbg.textContent = '🔍 Debug: ' + lastSample;
+      panel.appendChild(dbg);
+    }
+    return;
+  }
+
+  const maxC = rank[0][1];
+
+  // pódio
+  if (rank.length >= 2) {
+    const pw = document.createElement('div');
+    pw.className = 'podium-wrap';
+    const order = rank.length >= 3
+      ? [[rank[1],2,'p2'],[rank[0],1,'p1'],[rank[2],3,'p3']]
+      : [[null,2,'p2'],[rank[0],1,'p1'],[null,3,'p3']];
+    order.forEach(([entry,pos,cls]) => {
+      const pod = document.createElement('div');
+      pod.className = `pod ${cls}`;
+      if (!entry) { pod.innerHTML='<div class="pod-bar"></div>'; pw.appendChild(pod); return; }
+      const [name,count] = entry;
+      const medals = ['','👑 1°','2°','3°'];
+      pod.innerHTML = `
+        <div class="pod-rank">${medals[pos]}</div>
+        <div class="pod-avatar">${initials(name)}</div>
+        <div class="pod-name">${name.split(' ')[0]}</div>
+        <div class="pod-count">${count} leads</div>
+        <div class="pod-bar"></div>`;
+      pw.appendChild(pod);
+    });
+    panel.appendChild(pw);
+  }
+
+  // lista
+  const list = document.createElement('div');
+  list.className = 'rank-list';
+  rank.forEach(([name,count],i) => {
+    const item = document.createElement('div');
+    item.className = 'rank-item'+(i===0?' top1':'');
+    const pct = Math.round((count/maxC)*100);
+    item.innerHTML = `
+      <span class="rank-pos ${i<3?'top3':''}">${i+1}</span>
+      <div class="rank-avatar">${initials(name)}</div>
+      <div class="rank-info">
+        <div class="rank-name">${name}</div>
+        <div class="rank-sub">${count} lead${count>1?'s':''} capturado${count>1?'s':''}</div>
+      </div>
+      <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:${pct}%"></div></div>
+      <span class="rank-count">${count}</span>`;
+    list.appendChild(item);
+  });
+  panel.appendChild(list);
+
+  // gráfico
+  const top = rank.slice(0,15);
+  const sec = document.createElement('div');
+  sec.className = 'chart-section';
+  sec.innerHTML = '<div class="chart-title">Visão geral do dia</div>';
+  const cw = document.createElement('div');
+  cw.className = 'chart-wrap';
+  cw.style.height = (Math.min(top.length,15)*40+60)+'px';
+  cw.innerHTML = `<canvas id="dayChart"></canvas>`;
+  sec.appendChild(cw);
+  panel.appendChild(sec);
+
+  setTimeout(() => {
+    const ctx = document.getElementById('dayChart');
+    if (!ctx) return;
+    chartInst = new Chart(ctx, {
+      type:'bar',
+      data:{
+        labels: top.map(([n])=>n.split(' ')[0]),
+        datasets:[{
+          label:'Leads',
+          data: top.map(([,c])=>c),
+          backgroundColor: top.map((_,i)=> i===0?'rgba(212,160,23,0.85)':i<3?'rgba(212,160,23,0.5)':'rgba(255,107,0,0.35)'),
+          borderColor:     top.map((_,i)=> i===0?'#D4A017':i<3?'rgba(212,160,23,0.7)':'rgba(255,107,0,0.6)'),
+          borderWidth:1, borderRadius:4,
+        }]
+      },
+      options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{color:'rgba(255,255,255,0.45)',font:{size:11}}},
+          y:{grid:{display:false},ticks:{color:'rgba(255,255,255,0.75)',font:{size:12}}}
+        }
+      }
+    });
+  }, 80);
+}
+
+// ─── REFRESH ──────────────────────────────────────────────────────────────────
+async function refresh() {
+  const data = await fetchSheet();
+  if (data && data.length > 0) {
+    allData  = data;
+    rankings = buildRankings(data);
+    updateStats(rankings);
+    renderTabs();
+    renderPanel();
+    const now = new Date();
+    document.getElementById('update-info').textContent =
+      `Atualizado às ${now.toLocaleTimeString('pt-BR')} · ${data.length} registros · próxima atualização em 30s`;
+  } else {
+    document.getElementById('update-info').textContent =
+      '⚠ Não carregou. Verifique: Arquivo → Publicar na web → Publicar';
+    renderTabs();
+    renderPanel();
+  }
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+(function setActiveDay() {
+  const d = new Date().getDate();
+  const idx = [4,5,6].indexOf(d);
+  if (idx >= 0) activeDay = idx;
+})();
+
+renderTabs();
+renderPanel();
+refresh();
+setInterval(refresh, REFRESH_MS);
+</script>
+</body>
+</html>
