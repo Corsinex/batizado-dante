@@ -15,8 +15,6 @@
   --accent:#FF6B00;--muted:rgba(255,255,255,0.38);--border:rgba(255,255,255,0.08);
 }
 html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;}
-
-/* HERO */
 .hero{
   background:linear-gradient(135deg,#0B0F1E 55%,#0d1525);
   border-bottom:1px solid var(--border);
@@ -38,17 +36,13 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
   background:rgba(212,160,23,.1);border:0.5px solid rgba(212,160,23,.3);
   border-radius:20px;padding:4px 14px;
   font-size:11px;font-weight:500;color:var(--gold);
-  letter-spacing:.1em;text-transform:uppercase;
-  margin-bottom:1rem;
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;
 }
 .expo-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:glow 2s ease-in-out infinite;}
 @keyframes glow{0%,100%{opacity:1;box-shadow:0 0 4px var(--gold)}50%{opacity:.4;box-shadow:none}}
 .hero-logo{font-size:36px;display:block;margin-bottom:.4rem;animation:float 4s ease-in-out infinite;}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.hero-event{
-  font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,4vw,18px);
-  letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:.2rem;
-}
+.hero-event{font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,4vw,18px);letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:.2rem;}
 .hero-title{
   font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,9vw,72px);
   letter-spacing:.04em;line-height:.95;
@@ -57,24 +51,17 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
   margin-bottom:.3rem;
 }
 .hero-dates{font-size:13px;color:var(--muted);margin-bottom:1.25rem;letter-spacing:.04em;}
-
-/* LIVE */
 .live-badge{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(239,68,68,.1);border:0.5px solid rgba(239,68,68,.3);
-  border-radius:20px;padding:4px 12px;font-size:11px;color:#f87171;
-  margin-bottom:1.25rem;
+  border-radius:20px;padding:4px 12px;font-size:11px;color:#f87171;margin-bottom:1.25rem;
 }
 .live-dot{width:7px;height:7px;border-radius:50%;background:#ef4444;animation:pulse 1.4s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* STATS */
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:480px;margin:0 auto;}
 .stat{background:rgba(255,255,255,.05);border:0.5px solid var(--border);border-radius:10px;padding:.7rem .5rem;text-align:center;}
 .stat-val{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);letter-spacing:.04em;}
 .stat-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px;}
-
-/* TABS */
 .day-tabs{
   display:flex;overflow-x:auto;gap:8px;padding:1.25rem 1.25rem .75rem;
   scrollbar-width:none;position:sticky;top:0;z-index:10;
@@ -87,37 +74,20 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
   border:0.5px solid var(--border);background:transparent;color:var(--muted);
   transition:all .2s;font-family:'DM Sans',sans-serif;text-align:center;
 }
-.tab.active{
-  background:linear-gradient(135deg,rgba(212,160,23,.2),rgba(212,160,23,.08));
-  border-color:var(--gold);color:var(--gold);
-}
+.tab.active{background:linear-gradient(135deg,rgba(212,160,23,.2),rgba(212,160,23,.08));border-color:var(--gold);color:var(--gold);}
 .tab:hover:not(.active){border-color:rgba(212,160,23,.4);color:rgba(255,255,255,.8);}
 .tab-day{font-family:'Bebas Neue',sans-serif;font-size:22px;display:block;letter-spacing:.04em;line-height:1;}
 .tab-label{font-size:10px;display:block;opacity:.6;margin-top:2px;}
 .tab-count{font-size:11px;display:block;color:var(--accent);margin-top:3px;font-weight:700;}
-
-/* PANEL */
 .panel{padding:1rem 1.25rem 3rem;max-width:680px;margin:0 auto;}
-
-/* DAY HEADER */
-.day-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.5rem 0 .75rem;border-bottom:0.5px solid var(--border);margin-bottom:1rem;
-}
+.day-header{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0 .75rem;border-bottom:0.5px solid var(--border);margin-bottom:1rem;}
 .day-header-left{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
 .day-header-right{font-size:11px;color:var(--gold);}
-
-/* PODIUM */
 .podium-wrap{display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:.25rem 0 1.5rem;}
 .pod{flex:1;max-width:120px;text-align:center;}
 .pod-rank{font-size:12px;margin-bottom:4px;color:var(--muted);}
 .pod.p1 .pod-rank{color:var(--gold);font-weight:700;font-size:14px;}
-.pod-avatar{
-  width:44px;height:44px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Bebas Neue',sans-serif;font-size:16px;
-  margin:0 auto 6px;border:2px solid;
-}
+.pod-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;margin:0 auto 6px;border:2px solid;}
 .pod.p1 .pod-avatar{background:rgba(212,160,23,.18);border-color:var(--gold);color:var(--gold);}
 .pod.p2 .pod-avatar{background:rgba(180,180,180,.1);border-color:#aaa;color:#ccc;}
 .pod.p3 .pod-avatar{background:rgba(180,100,40,.1);border-color:#b46030;color:#c07040;}
@@ -127,76 +97,45 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
 .pod.p1 .pod-bar{height:80px;background:rgba(212,160,23,.15);border-top:2px solid var(--gold);}
 .pod.p2 .pod-bar{height:58px;background:rgba(180,180,180,.08);border-top:2px solid #aaa;}
 .pod.p3 .pod-bar{height:40px;background:rgba(180,100,40,.08);border-top:2px solid #b46030;}
-
-/* RANK LIST */
 .rank-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem;}
-.rank-item{
-  display:flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.04);border:0.5px solid var(--border);
-  border-radius:10px;padding:9px 12px;transition:background .15s;
-}
+.rank-item{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:0.5px solid var(--border);border-radius:10px;padding:9px 12px;transition:background .15s;}
 .rank-item:hover{background:rgba(255,255,255,.07);}
 .rank-item.top1{border-color:rgba(212,160,23,.4);background:rgba(212,160,23,.06);}
 .rank-pos{font-family:'Bebas Neue',sans-serif;font-size:17px;min-width:26px;text-align:center;color:var(--muted);}
 .rank-pos.top3{color:var(--gold);}
-.rank-avatar{
-  width:34px;height:34px;border-radius:50%;
-  background:rgba(212,160,23,.12);
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;
-}
+.rank-avatar{width:34px;height:34px;border-radius:50%;background:rgba(212,160,23,.12);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;}
 .rank-info{flex:1;min-width:0;}
 .rank-name{font-size:13px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .rank-sub{font-size:11px;color:var(--muted);}
 .rank-bar-wrap{width:72px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;flex-shrink:0;}
 .rank-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--accent));}
 .rank-count{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);min-width:32px;text-align:right;}
-
-/* CHART */
 .chart-section{margin-top:1rem;}
 .chart-title{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem;}
 .chart-wrap{position:relative;width:100%;}
-
-/* EMPTY */
 .empty-day{text-align:center;padding:3rem 1rem;}
 .empty-icon{font-size:52px;margin-bottom:.75rem;display:block;opacity:.3;}
 .empty-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.04em;color:var(--gold2);margin-bottom:.6rem;}
 .empty-msg{font-size:14px;color:var(--muted);max-width:290px;margin:0 auto 1.5rem;line-height:1.6;}
 .empty-fire{font-size:22px;letter-spacing:8px;opacity:.5;}
-
-/* LOADING */
 .loading{text-align:center;padding:3rem;color:var(--muted);font-size:13px;}
 .loading-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin:0 3px;animation:bounce .9s ease-in-out infinite;}
 .loading-dot:nth-child(2){animation-delay:.15s;}
 .loading-dot:nth-child(3){animation-delay:.3s;}
 @keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:.4}40%{transform:scale(1);opacity:1}}
-
-/* UPDATE */
 .update-info{text-align:center;font-size:11px;color:var(--muted);padding:.75rem;border-top:0.5px solid var(--border);margin-top:1rem;}
-
-/* ERROR */
-.error-box{
-  background:rgba(239,68,68,.08);border:0.5px solid rgba(239,68,68,.3);
-  border-radius:10px;padding:1rem 1.25rem;margin:1rem 0;font-size:12px;color:#f87171;
-  text-align:center;line-height:1.6;
-}
-
-@media(max-width:480px){
-  .hero-title{font-size:48px;}
-  .stat-val{font-size:20px;}
-  .tab-day{font-size:18px;}
-}
+.debug-box{background:rgba(255,107,0,.08);border:0.5px solid rgba(255,107,0,.3);border-radius:8px;padding:.75rem;margin:1rem 0;font-size:11px;color:rgba(255,107,0,.8);font-family:monospace;line-height:1.6;word-break:break-all;}
+@media(max-width:480px){.hero-title{font-size:48px;}.stat-val{font-size:20px;}.tab-day{font-size:18px;}}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <div class="expo-badge"><span class="dot"></span>Ao vivo · Expo Inox 2026</div>
   <span class="hero-logo">🚀</span>
   <div class="hero-event">Multiluz Solar</div>
   <div class="hero-title">Expo Inox</div>
-  <div class="hero-dates">05 · 06 · 07 de junho de 2026</div>
+  <div class="hero-dates">04 · 05 · 06 de junho de 2026</div>
   <div class="live-badge"><span class="live-dot"></span>Atualiza a cada 30s</div>
   <div class="stat-row">
     <div class="stat"><div class="stat-val" id="s-leads">—</div><div class="stat-lbl">Total Leads</div></div>
@@ -205,10 +144,7 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
   </div>
 </div>
 
-<!-- TABS -->
 <div class="day-tabs" id="tabs"></div>
-
-<!-- PANEL -->
 <div class="panel" id="panel-content">
   <div class="loading">
     <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
@@ -218,25 +154,43 @@ html,body{min-height:100%;background:var(--navy);color:#fff;font-family:'DM Sans
 <div class="update-info" id="update-info">Aguardando dados...</div>
 
 <script>
-// ─── CONFIG ─────────────────────────────────────────────────────────────────
+// ─── CONFIG ──────────────────────────────────────────────────────────────────
 const SHEET_ID   = '13PL1beQX2VrUfXdm5rLNh3itn6VJKQfCSwr3jv3Qk-A';
 const SHEET_NAME = 'Respostas ao formulário 1';
 const REFRESH_MS = 30000;
 const SHEET_URL  = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
 
-// ─── DIAS DA EXPO INO ────────────────────────────────────────────────────────
-const DAYS       = ['05/06','06/06','07/06'];
-const DAY_LABELS = ['Sexta-feira, 05 de junho','Sábado, 06 de junho','Domingo, 07 de junho'];
-const TAB_SHORT  = ['Sex','Sáb','Dom'];
-const TAB_NUM    = ['05','06','07'];
+// ─── DIAS DA EXPO INOX ────────────────────────────────────────────────────────
+// Chave = como vamos identificar o dia internamente
+const DAYS       = ['04/06','05/06','06/06'];
+const DAY_LABELS = ['Quinta-feira, 04 de junho','Sexta-feira, 05 de junho','Sábado, 06 de junho'];
+const TAB_SHORT  = ['Qui','Sex','Sáb'];
+const TAB_NUM    = ['04','05','06'];
 
-const MOTIVATIONS = [
-  { title:'A largada foi dada!',   msg:'Hoje começa a Expo Inox  Cada lead é um passo para o pódio. Vai com tudo! 🔥' },
-  { title:'Dia 2 — Hora de voar!', msg:'Ontem foi aquecimento. Hoje o ritmo dobra. Quem vai liderar o placar? 🚀' },
-  { title:'Último round!',         msg:'Dia final da Expo Inox  Deixa tudo na arena — sem arrependimento. Bora! ⚡' },
+// Todas as variações de data que o Google Sheets pode retornar para cada dia
+// O GViz pode retornar: "4/6/2026", "04/06/2026", "2026-06-04", "Date(2026,5,4)" etc.
+const DAY_MATCHERS = [
+  // dia 04/06/2026
+  (s) => /\b4\/6\/2026\b/.test(s)  || /\b04\/06\/2026\b/.test(s) ||
+         /2026-06-04/.test(s)       || /Date\(2026,5,4\)/.test(s) ||
+         /\b4\/06\/2026\b/.test(s)  || /\b04\/6\/2026\b/.test(s),
+  // dia 05/06/2026
+  (s) => /\b5\/6\/2026\b/.test(s)  || /\b05\/06\/2026\b/.test(s) ||
+         /2026-06-05/.test(s)       || /Date\(2026,5,5\)/.test(s) ||
+         /\b5\/06\/2026\b/.test(s)  || /\b05\/6\/2026\b/.test(s),
+  // dia 06/06/2026
+  (s) => /\b6\/6\/2026\b/.test(s)  || /\b06\/06\/2026\b/.test(s) ||
+         /2026-06-06/.test(s)       || /Date\(2026,5,6\)/.test(s) ||
+         /\b6\/06\/2026\b/.test(s)  || /\b06\/6\/2026\b/.test(s),
 ];
 
-// ─── NORMALIZAÇÃO ────────────────────────────────────────────────────────────
+const MOTIVATIONS = [
+  { title:'A largada foi dada!',    msg:'Hoje começa a Expo Inox. Cada lead é um passo para o pódio. Vai com tudo! 🔥' },
+  { title:'Dia 2 — Hora de voar!',  msg:'Ontem foi aquecimento. Hoje o ritmo dobra. Quem vai liderar o placar? 🚀' },
+  { title:'Último round!',          msg:'Dia final da Expo Inox. Deixa tudo na arena — sem arrependimento. Bora! ⚡' },
+];
+
+// ─── NORMALIZAÇÃO ─────────────────────────────────────────────────────────────
 const NORM_MAP = {
   'yasmim soares':'Yasmin Soares','yasmin soares':'Yasmin Soares','yasmin':'Yasmin Soares',
   'kevson souza':'Kevson Souza','kevson de jesus':'Kevson Souza','kevison':'Kevson Souza',
@@ -283,30 +237,30 @@ function normalizeName(raw) {
   if (['nao sei','não sei','teste','eu','ótimo','otimo'].includes(clean)) return null;
   if (clean.startsWith('não teve')) return null;
   return NORM_MAP[clean] || raw.trim().split(' ').slice(0,2)
-    .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+    .map(w => w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' ');
 }
 
-function getDay(ts) {
-  if (!ts) return null;
-  const s = String(ts);
-  const m1 = s.match(/^(\d{2})\/(\d{2})/);
-  if (m1) return m1[1]+'/'+m1[2];
-  const m2 = s.match(/(\d{4})-(\d{2})-(\d{2})/);
-  if (m2) return m2[3]+'/'+m2[2];
-  return null;
+function matchDay(ts) {
+  // ts pode ser string formatada ou valor bruto do gviz
+  const s = String(ts || '');
+  for (let i = 0; i < DAY_MATCHERS.length; i++) {
+    if (DAY_MATCHERS[i](s)) return i;
+  }
+  return -1;
 }
 
 function initials(name) {
   return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
 }
 
-// ─── ESTADO ──────────────────────────────────────────────────────────────────
-let activeDay = 0;
-let rankings  = {};
-let allData   = [];
-let chartInst = null;
+// ─── ESTADO ───────────────────────────────────────────────────────────────────
+let activeDay  = 0;
+let rankings   = { 0:{}, 1:{}, 2:{} };
+let allData    = [];
+let chartInst  = null;
+let lastSample = '';   // para debug
 
-// ─── FETCH ───────────────────────────────────────────────────────────────────
+// ─── FETCH ────────────────────────────────────────────────────────────────────
 async function fetchSheet() {
   try {
     const res  = await fetch(SHEET_URL + '&rand=' + Date.now());
@@ -321,24 +275,37 @@ async function fetchSheet() {
 
 function parseGViz(json) {
   const rows = json.table?.rows || [];
-  return rows.map(row => {
+  const data = [];
+  rows.forEach(row => {
     const cells = row.c || [];
-    const ts    = cells[0] ? String(cells[0].f || cells[0].v || '') : '';
-    const vend  = cells[6] ? String(cells[6].v || '') : '';
-    return [ts, vend];
+    if (!cells[0]) return;
+    // Pega AMBOS: valor formatado (f) e valor bruto (v) para maximizar chances de match
+    const tsF = cells[0].f ? String(cells[0].f) : '';
+    const tsV = cells[0].v ? String(cells[0].v) : '';
+    const vend = cells[6] ? String(cells[6].v || '') : '';
+    data.push([tsF, tsV, vend]);
   });
+  // salva amostra para debug
+  if (data.length > 0) {
+    lastSample = `Total linhas: ${data.length} | Exemplo ts: f="${data[data.length-1][0]}" v="${data[data.length-1][1]}"`;
+  }
+  return data;
 }
 
 function buildRankings(data) {
-  const byDay = {};
-  DAYS.forEach(d => { byDay[d] = {}; });
-  data.forEach(([ts, rawVend]) => {
-    const day = getDay(ts);
-    if (!day || !byDay[day]) return;
+  const byDay = {0:{}, 1:{}, 2:{}};
+  let matched = 0, unmatched = 0;
+  data.forEach(([tsF, tsV, rawVend]) => {
+    // tenta match nos dois formatos
+    let idx = matchDay(tsF);
+    if (idx < 0) idx = matchDay(tsV);
+    if (idx < 0) { unmatched++; return; }
+    matched++;
     const name = normalizeName(rawVend);
     if (!name) return;
-    byDay[day][name] = (byDay[day][name] || 0) + 1;
+    byDay[idx][name] = (byDay[idx][name] || 0) + 1;
   });
+  console.log(`Matched: ${matched} | Unmatched: ${unmatched}`);
   return byDay;
 }
 
@@ -346,14 +313,19 @@ function sortRank(obj) {
   return Object.entries(obj).sort((a,b) => b[1]-a[1]);
 }
 
-// ─── STATS ───────────────────────────────────────────────────────────────────
-function updateStats(data, rankings) {
-  const total = data.filter(([,r]) => normalizeName(r)).length;
-  const vSet  = new Set();
-  DAYS.forEach(d => Object.keys(rankings[d]).forEach(n => vSet.add(n)));
-  const all   = {};
-  DAYS.forEach(d => Object.entries(rankings[d]).forEach(([n,c]) => { all[n]=(all[n]||0)+c; }));
-  const top   = Object.entries(all).sort((a,b) => b[1]-a[1]);
+// ─── STATS ────────────────────────────────────────────────────────────────────
+function updateStats(rankings) {
+  let total = 0;
+  const vSet = new Set();
+  const all  = {};
+  [0,1,2].forEach(i => {
+    Object.entries(rankings[i]).forEach(([n,c]) => {
+      total += c;
+      vSet.add(n);
+      all[n] = (all[n]||0)+c;
+    });
+  });
+  const top   = Object.entries(all).sort((a,b)=>b[1]-a[1]);
   const lider = top.length ? top[0][0].split(' ')[0] : '—';
   document.getElementById('s-leads').textContent = total || '—';
   document.getElementById('s-vend').textContent  = vSet.size || '—';
@@ -364,32 +336,31 @@ function updateStats(data, rankings) {
 function renderTabs() {
   const wrap = document.getElementById('tabs');
   wrap.innerHTML = '';
-  DAYS.forEach((d, i) => {
-    const count = Object.values(rankings[d] || {}).reduce((a,b)=>a+b, 0);
+  [0,1,2].forEach(i => {
+    const count = Object.values(rankings[i]||{}).reduce((a,b)=>a+b, 0);
     const btn   = document.createElement('button');
-    btn.className = 'tab' + (i === activeDay ? ' active' : '');
+    btn.className = 'tab' + (i===activeDay ? ' active' : '');
     btn.innerHTML = `
       <span class="tab-day">${TAB_NUM[i]}</span>
       <span class="tab-label">${TAB_SHORT[i]} · Jun</span>
-      ${count > 0 ? `<span class="tab-count">${count} leads</span>` : '<span class="tab-count" style="opacity:.3">—</span>'}
-    `;
-    btn.onclick = () => { activeDay = i; renderTabs(); renderPanel(); };
+      ${count > 0
+        ? `<span class="tab-count">${count} leads</span>`
+        : `<span class="tab-count" style="opacity:.3">—</span>`}`;
+    btn.onclick = () => { activeDay=i; renderTabs(); renderPanel(); };
     wrap.appendChild(btn);
   });
 }
 
-// ─── PANEL ───────────────────────────────────────────────────────────────────
+// ─── PANEL ────────────────────────────────────────────────────────────────────
 function renderPanel() {
-  if (chartInst) { chartInst.destroy(); chartInst = null; }
-  const panel  = document.getElementById('panel-content');
+  if (chartInst) { chartInst.destroy(); chartInst=null; }
+  const panel    = document.getElementById('panel-content');
   panel.innerHTML = '';
 
-  const day      = DAYS[activeDay];
-  const rank     = sortRank(rankings[day] || {});
+  const rank     = sortRank(rankings[activeDay]||{});
   const hasData  = rank.length > 0;
-  const totalDay = rank.reduce((a,b) => a+b[1], 0);
+  const totalDay = rank.reduce((a,b)=>a+b[1], 0);
 
-  // header
   const hdr = document.createElement('div');
   hdr.className = 'day-header';
   hdr.innerHTML = `
@@ -398,7 +369,7 @@ function renderPanel() {
   panel.appendChild(hdr);
 
   if (!hasData) {
-    const mi = MOTIVATIONS[activeDay] || MOTIVATIONS[0];
+    const mi = MOTIVATIONS[activeDay];
     const empty = document.createElement('div');
     empty.className = 'empty-day';
     empty.innerHTML = `
@@ -407,6 +378,14 @@ function renderPanel() {
       <p class="empty-msg">${mi.msg}</p>
       <div class="empty-fire">🔥 🔥 🔥</div>`;
     panel.appendChild(empty);
+
+    // mostra debug se tiver dados mas não matchou nenhum
+    if (allData.length > 0 && lastSample) {
+      const dbg = document.createElement('div');
+      dbg.className = 'debug-box';
+      dbg.textContent = '🔍 Debug: ' + lastSample;
+      panel.appendChild(dbg);
+    }
     return;
   }
 
@@ -414,7 +393,7 @@ function renderPanel() {
 
   // pódio
   if (rank.length >= 2) {
-    const pw    = document.createElement('div');
+    const pw = document.createElement('div');
     pw.className = 'podium-wrap';
     const order = rank.length >= 3
       ? [[rank[1],2,'p2'],[rank[0],1,'p1'],[rank[2],3,'p3']]
@@ -441,7 +420,7 @@ function renderPanel() {
   list.className = 'rank-list';
   rank.forEach(([name,count],i) => {
     const item = document.createElement('div');
-    item.className = 'rank-item' + (i===0 ? ' top1' : '');
+    item.className = 'rank-item'+(i===0?' top1':'');
     const pct = Math.round((count/maxC)*100);
     item.innerHTML = `
       <span class="rank-pos ${i<3?'top3':''}">${i+1}</span>
@@ -457,86 +436,73 @@ function renderPanel() {
   panel.appendChild(list);
 
   // gráfico
-  if (rank.length > 0) {
-    const top = rank.slice(0,15);
-    const sec = document.createElement('div');
-    sec.className = 'chart-section';
-    sec.innerHTML = '<div class="chart-title">Visão geral do dia</div>';
-    const cw = document.createElement('div');
-    cw.className = 'chart-wrap';
-    cw.style.height = (Math.min(top.length,15)*40+60)+'px';
-    cw.innerHTML = `<canvas id="dayChart" role="img" aria-label="Gráfico leads por vendedor"></canvas>`;
-    sec.appendChild(cw);
-    panel.appendChild(sec);
+  const top = rank.slice(0,15);
+  const sec = document.createElement('div');
+  sec.className = 'chart-section';
+  sec.innerHTML = '<div class="chart-title">Visão geral do dia</div>';
+  const cw = document.createElement('div');
+  cw.className = 'chart-wrap';
+  cw.style.height = (Math.min(top.length,15)*40+60)+'px';
+  cw.innerHTML = `<canvas id="dayChart"></canvas>`;
+  sec.appendChild(cw);
+  panel.appendChild(sec);
 
-    setTimeout(() => {
-      const ctx = document.getElementById('dayChart');
-      if (!ctx) return;
-      chartInst = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: top.map(([n]) => n.split(' ')[0]),
-          datasets: [{
-            label: 'Leads',
-            data: top.map(([,c]) => c),
-            backgroundColor: top.map((_,i) =>
-              i===0 ? 'rgba(212,160,23,0.85)' : i<3 ? 'rgba(212,160,23,0.5)' : 'rgba(255,107,0,0.35)'),
-            borderColor: top.map((_,i) =>
-              i===0 ? '#D4A017' : i<3 ? 'rgba(212,160,23,0.7)' : 'rgba(255,107,0,0.6)'),
-            borderWidth:1, borderRadius:4,
-          }]
-        },
-        options: {
-          indexAxis:'y', responsive:true, maintainAspectRatio:false,
-          plugins:{ legend:{ display:false } },
-          scales: {
-            x:{ grid:{ color:'rgba(255,255,255,0.06)' }, ticks:{ color:'rgba(255,255,255,0.45)', font:{size:11} } },
-            y:{ grid:{ display:false }, ticks:{ color:'rgba(255,255,255,0.75)', font:{size:12} } }
-          }
+  setTimeout(() => {
+    const ctx = document.getElementById('dayChart');
+    if (!ctx) return;
+    chartInst = new Chart(ctx, {
+      type:'bar',
+      data:{
+        labels: top.map(([n])=>n.split(' ')[0]),
+        datasets:[{
+          label:'Leads',
+          data: top.map(([,c])=>c),
+          backgroundColor: top.map((_,i)=> i===0?'rgba(212,160,23,0.85)':i<3?'rgba(212,160,23,0.5)':'rgba(255,107,0,0.35)'),
+          borderColor:     top.map((_,i)=> i===0?'#D4A017':i<3?'rgba(212,160,23,0.7)':'rgba(255,107,0,0.6)'),
+          borderWidth:1, borderRadius:4,
+        }]
+      },
+      options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{color:'rgba(255,255,255,0.45)',font:{size:11}}},
+          y:{grid:{display:false},ticks:{color:'rgba(255,255,255,0.75)',font:{size:12}}}
         }
-      });
-    }, 80);
-  }
+      }
+    });
+  }, 80);
 }
 
-// ─── REFRESH ─────────────────────────────────────────────────────────────────
+// ─── REFRESH ──────────────────────────────────────────────────────────────────
 async function refresh() {
   const data = await fetchSheet();
   if (data && data.length > 0) {
-    allData   = data;
-    rankings  = buildRankings(data);
-    updateStats(data, rankings);
+    allData  = data;
+    rankings = buildRankings(data);
+    updateStats(rankings);
     renderTabs();
     renderPanel();
     const now = new Date();
     document.getElementById('update-info').textContent =
-      `Atualizado às ${now.toLocaleTimeString('pt-BR')} · próxima atualização em 30s`;
+      `Atualizado às ${now.toLocaleTimeString('pt-BR')} · ${data.length} registros · próxima atualização em 30s`;
   } else {
     document.getElementById('update-info').textContent =
-      '⚠ Não foi possível carregar. Verifique se a planilha está publicada em: Arquivo → Publicar na web';
-    // mostra estado inicial mesmo sem dados
-    if (!allData.length) {
-      rankings = {};
-      DAYS.forEach(d => { rankings[d] = {}; });
-      renderTabs();
-      renderPanel();
-    }
+      '⚠ Não carregou. Verifique: Arquivo → Publicar na web → Publicar';
+    renderTabs();
+    renderPanel();
   }
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 (function setActiveDay() {
-  const today = new Date().getDate();
-  const idx   = [5, 6, 7].indexOf(today);
+  const d = new Date().getDate();
+  const idx = [4,5,6].indexOf(d);
   if (idx >= 0) activeDay = idx;
 })();
 
-// estado inicial vazio para não ficar só com loading
-rankings = {};
-DAYS.forEach(d => { rankings[d] = {}; });
 renderTabs();
 renderPanel();
-
 refresh();
 setInterval(refresh, REFRESH_MS);
 </script>
